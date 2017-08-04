@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048029571F349D5E00ED0E14 /* WeChatPriUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 048029551F349D5E00ED0E14 /* WeChatPriUtil.h */; };
+		048029581F349D5E00ED0E14 /* WeChatPriUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 048029561F349D5E00ED0E14 /* WeChatPriUtil.m */; };
 		04847F281F3409420050C32F /* put ipa or app here in Resources */ = {isa = PBXBuildFile; fileRef = 04847F271F3409420050C32F /* put ipa or app here */; };
 		04847F311F3409420050C32F /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04847F301F3409420050C32F /* Cycript.framework */; };
 		04847F331F3409420050C32F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04847F321F3409420050C32F /* JavaScriptCore.framework */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048029551F349D5E00ED0E14 /* WeChatPriUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPriUtil.h; sourceTree = "<group>"; };
+		048029561F349D5E00ED0E14 /* WeChatPriUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPriUtil.m; sourceTree = "<group>"; };
 		04847F231F3409420050C32F /* WeChatPri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChatPri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04847F271F3409420050C32F /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
 		04847F291F3409420050C32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				04847F4D1F3409420050C32F /* WeChatPriDylib.h */,
 				04847F4F1F3409420050C32F /* WeChatPriDylib.m */,
 				049AC36F1F344D09001A2C3F /* WeChatPri.h */,
+				048029551F349D5E00ED0E14 /* WeChatPriUtil.h */,
+				048029561F349D5E00ED0E14 /* WeChatPriUtil.m */,
 				049AC3711F345345001A2C3F /* WeChatPriConfigCenter.h */,
 				049AC3721F345345001A2C3F /* WeChatPriConfigCenter.m */,
 				049AC3731F345345001A2C3F /* WeChatPriGloabDefine.h */,
@@ -194,6 +200,7 @@
 			files = (
 				04847F421F3409420050C32F /* CaptainHook.h in Headers */,
 				049AC3741F345345001A2C3F /* WeChatPriConfigCenter.h in Headers */,
+				048029571F349D5E00ED0E14 /* WeChatPriUtil.h in Headers */,
 				04847F441F3409420050C32F /* WeChatPriDylib-Prefix.pch in Headers */,
 				04847F4E1F3409420050C32F /* WeChatPriDylib.h in Headers */,
 				04847F3D1F3409420050C32F /* JRSwizzle.h in Headers */,
@@ -324,6 +331,7 @@
 				04847F4A1F3409420050C32F /* fishhook.c in Sources */,
 				04847F501F3409420050C32F /* WeChatPriDylib.m in Sources */,
 				04847F471F3409420050C32F /* AntiAntiDebug.m in Sources */,
+				048029581F349D5E00ED0E14 /* WeChatPriUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

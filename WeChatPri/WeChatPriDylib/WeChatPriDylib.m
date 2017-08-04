@@ -16,6 +16,7 @@
 
 #import "WeChatPriConfigCenter.h"
 #import "WeChatPri.h"
+#import "WeChatPriUtil.h"
 
 #define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
 
@@ -354,18 +355,6 @@ CHDeclareMethod3(void, CMessageMgr, DelMsg, id, arg1, MsgList, id, arg2, DelAll,
 
 //MARK: 屏蔽消息
 
-NSMutableArray * filtMessageWrapArr(NSMutableArray *msgList) {
-    NSMutableArray *msgListResult = [msgList mutableCopy];
-    for (id msgWrap in msgList) {
-        Ivar nsFromUsrIvar = class_getInstanceVariable(objc_getClass("CMessageWrap"), "m_nsFromUsr");
-        NSString *m_nsFromUsr = object_getIvar(msgWrap, nsFromUsrIvar);
-        if ([WeChatPriConfigCenter sharedInstance].chatIgnoreInfo[m_nsFromUsr].boolValue) {
-            [msgListResult removeObject:msgWrap];
-        }
-    }
-    return msgListResult;
-}
-
 CHDeclareClass(BaseMsgContentViewController)
 CHDeclareMethod1(void, BaseMsgContentViewController, viewDidAppear, BOOL, animated)
 {
@@ -394,7 +383,7 @@ CHDeclareMethod0(void, AddContactToChatRoomViewController, reloadTableData)
     NSString *userName = [WeChatPriConfigCenter sharedInstance].currentUserName;
     MMTableViewInfo *tableInfo = [self valueForKeyPath:@"m_tableViewInfo"];
     MMTableViewSectionInfo *sectionInfo = [tableInfo getSectionAt:1];
-    MMTableViewCellInfo *ignoreCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleIgnoreChatRoom:) target:[WeChatPriConfigCenter sharedInstance] title:@"屏蔽此傻逼" on:[WeChatPriConfigCenter sharedInstance].chatIgnoreInfo[userName].boolValue];
+    MMTableViewCellInfo *ignoreCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleIgnoreChatRoom:) target:[WeChatPriConfigCenter sharedInstance] title:@"屏蔽此人消息" on:[WeChatPriConfigCenter sharedInstance].chatIgnoreInfo[userName].boolValue];
     [sectionInfo addCell:ignoreCellInfo];
     MMTableView *tableView = [tableInfo getTableView];
     [tableView reloadData];
@@ -402,11 +391,9 @@ CHDeclareMethod0(void, AddContactToChatRoomViewController, reloadTableData)
 
 CHDeclareMethod6(id, CMessageMgr, GetMsgByCreateTime, id, arg1, FromID, unsigned int, arg2, FromCreateTime, unsigned int, arg3, Limit, unsigned int, arg4, LeftCount, unsigned int*, arg5, FromSequence, unsigned int, arg6)
 {
-    NSLog(@"GetMsgByCreateTime:%@ FromID:%d FromCreateTime:%d Limit:%d FromSequence:%d",arg1,arg2,arg3,arg4,arg6);
     id result = CHSuper6(CMessageMgr, GetMsgByCreateTime, arg1, FromID, arg2, FromCreateTime, arg3, Limit, arg4, LeftCount, arg5, FromSequence, arg6);
-    NSLog(@"msgresult:%@",result);
     if ([WeChatPriConfigCenter sharedInstance].chatIgnoreInfo[arg1].boolValue) {
-        return filtMessageWrapArr(result);
+        return [WeChatPriUtil filtMessageWrapArr:result];
     }
     return result;
 }
@@ -415,14 +402,15 @@ CHDeclareClass(CSyncBaseEvent)
 CHDeclareMethod2(BOOL, CSyncBaseEvent, BatchAddMsg, BOOL, arg1, ShowPush, BOOL, arg2)
 {
     NSMutableArray *msgList = [self valueForKeyPath:@"m_arrMsgList"];
-    NSMutableArray *msgListResult = filtMessageWrapArr(msgList);
+    NSMutableArray *msgListResult = [WeChatPriUtil filtMessageWrapArr:msgList];
     [self setValue:msgListResult forKeyPath:@"m_arrMsgList"];
     return CHSuper2(CSyncBaseEvent, BatchAddMsg, arg1, ShowPush, arg2);
 }
 
 CHConstructor{
-    CHLoadLateClass(MicroMessengerAppDelegate);  // load class (that will be "available later")
-    CHHook2(MicroMessengerAppDelegate, application, didFinishLaunchingWithOptions); // register hook
+    // 存取本地配置
+    CHLoadLateClass(MicroMessengerAppDelegate);
+    CHHook2(MicroMessengerAppDelegate, application, didFinishLaunchingWithOptions);
     
     // 清理发现页面
     CHLoadLateClass(FindFriendEntryViewController);
@@ -445,6 +433,6 @@ CHConstructor{
     // 消息撤回
     CHLoadLateClass(CMessageMgr);
     CHHook1(CMessageMgr, onRevokeMsg);
-    CHHook(2, CMessageMgr, AddMsg, MsgWrap);
+    CHHook2(CMessageMgr, AddMsg, MsgWrap);
 }
 
