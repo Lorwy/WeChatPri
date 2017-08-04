@@ -56,6 +56,9 @@ CHDeclareClass(UILabel)
 // 防止消息撤回
 CHDeclareClass(ChatRoomInfoViewController)
 
+//
+CHDeclareClass(CMessageMgr);
+
 
 
 static __attribute__((constructor)) void entry()
@@ -172,7 +175,7 @@ CHOptimizedMethod2(self, void, MMTabBarController, setTabBarBadgeString, id, arg
     }
 }
 
-CHOptimizedMethod2(self, void, MMTabBarController, setTabBarBadgeValue, id, arg1, forIndex, unsigned int, arg2)
+CHOptimizedMethod2(self, void, MMTabBarController, setTabBarBadgeValue, long long, arg1, forIndex, unsigned int, arg2)
 {
     if (arg2 != 2 && arg2 != 3) {
         CHSuper2(MMTabBarController, setTabBarBadgeValue, arg1, forIndex, arg2);
@@ -298,6 +301,40 @@ CHDeclareMethod1(void, UILabel, setText, NSString *, text)
     }
 }
 
+//MARK: At all
+CHOptimizedMethod2(self, void, CMessageMgr, AddMsg, id, arg1, MsgWrap, CMessageWrap *, wrap){
+    NSUInteger type = wrap.m_uiMessageType;
+    NSString *mFromUser = wrap.m_nsFromUsr;
+    NSString *mToUsr = wrap.m_nsToUsr;
+    NSString *mContent = wrap.m_nsContent;
+    NSString *mSource = wrap.m_nsMsgSource;
+    CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+    CContact *selfContact = [contactManager getSelfContact];
+    if (type == 1){
+        if ([mFromUser isEqualToString:selfContact.m_nsUsrName]) {
+            if ([mToUsr hasSuffix:@"@chatroom"]) {
+                if( mSource == nil){
+                    NSString *aaa = [selfContact.m_nsUsrName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; NSLog(@"length=%lu,%@",(unsigned long)aaa.length,aaa);
+                    NSArray *result = (NSArray *)[objc_getClass("CContact") getChatRoomMemberWithoutMyself:mToUsr];
+                    if ([mContent hasPrefix:@"#所有人"]){
+                        // 前缀要求
+                        NSString *subStr = [mContent substringFromIndex:4];
+                        NSMutableString *string = [NSMutableString string];
+                        [result enumerateObjectsUsingBlock:^(CContact *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            [string appendFormat:@",%@",obj.m_nsUsrName];
+                        }];
+                        NSString *sourceString = [string substringFromIndex:1];
+                        wrap.m_uiStatus = 3;
+                        wrap.m_nsContent = subStr;
+                        wrap.m_nsMsgSource = [NSString stringWithFormat:@"<msgsource><atuserlist>%@</atuserlist></msgsource>",sourceString];
+                    }
+                }
+            }
+        }
+    }
+    CHSuper(2, CMessageMgr,AddMsg,arg1,MsgWrap,wrap);
+}
+
 //MARK: 阻止撤回消息
 CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, id, msg)
 {
@@ -408,5 +445,6 @@ CHConstructor{
     // 消息撤回
     CHLoadLateClass(CMessageMgr);
     CHHook1(CMessageMgr, onRevokeMsg);
+    CHHook(2, CMessageMgr, AddMsg, MsgWrap);
 }
 
