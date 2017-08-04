@@ -22,6 +22,9 @@
 		04847F4C1F3409420050C32F /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 04847F4B1F3409420050C32F /* fishhook.h */; };
 		04847F4E1F3409420050C32F /* WeChatPriDylib.h in Headers */ = {isa = PBXBuildFile; fileRef = 04847F4D1F3409420050C32F /* WeChatPriDylib.h */; };
 		04847F501F3409420050C32F /* WeChatPriDylib.m in Sources */ = {isa = PBXBuildFile; fileRef = 04847F4F1F3409420050C32F /* WeChatPriDylib.m */; };
+		049AC3741F345345001A2C3F /* WeChatPriConfigCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 049AC3711F345345001A2C3F /* WeChatPriConfigCenter.h */; };
+		049AC3751F345345001A2C3F /* WeChatPriConfigCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 049AC3721F345345001A2C3F /* WeChatPriConfigCenter.m */; };
+		049AC3761F345345001A2C3F /* WeChatPriGloabDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 049AC3731F345345001A2C3F /* WeChatPriGloabDefine.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,10 @@
 		04847F4B1F3409420050C32F /* fishhook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
 		04847F4D1F3409420050C32F /* WeChatPriDylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatPriDylib.h; sourceTree = "<group>"; };
 		04847F4F1F3409420050C32F /* WeChatPriDylib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeChatPriDylib.m; sourceTree = "<group>"; };
+		049AC36F1F344D09001A2C3F /* WeChatPri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatPri.h; sourceTree = "<group>"; };
+		049AC3711F345345001A2C3F /* WeChatPriConfigCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPriConfigCenter.h; sourceTree = "<group>"; };
+		049AC3721F345345001A2C3F /* WeChatPriConfigCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPriConfigCenter.m; sourceTree = "<group>"; };
+		049AC3731F345345001A2C3F /* WeChatPriGloabDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPriGloabDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +139,10 @@
 				04847F431F3409420050C32F /* WeChatPriDylib-Prefix.pch */,
 				04847F4D1F3409420050C32F /* WeChatPriDylib.h */,
 				04847F4F1F3409420050C32F /* WeChatPriDylib.m */,
+				049AC36F1F344D09001A2C3F /* WeChatPri.h */,
+				049AC3711F345345001A2C3F /* WeChatPriConfigCenter.h */,
+				049AC3721F345345001A2C3F /* WeChatPriConfigCenter.m */,
+				049AC3731F345345001A2C3F /* WeChatPriGloabDefine.h */,
 				04847F3B1F3409420050C32F /* JRSwizzle */,
 				04847F401F3409420050C32F /* CaptainHook */,
 				04847F451F3409420050C32F /* AntiAntiDebug */,
@@ -182,10 +193,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04847F421F3409420050C32F /* CaptainHook.h in Headers */,
+				049AC3741F345345001A2C3F /* WeChatPriConfigCenter.h in Headers */,
 				04847F441F3409420050C32F /* WeChatPriDylib-Prefix.pch in Headers */,
 				04847F4E1F3409420050C32F /* WeChatPriDylib.h in Headers */,
 				04847F3D1F3409420050C32F /* JRSwizzle.h in Headers */,
 				04847F4C1F3409420050C32F /* fishhook.h in Headers */,
+				049AC3761F345345001A2C3F /* WeChatPriGloabDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04847F3F1F3409420050C32F /* JRSwizzle.m in Sources */,
+				049AC3751F345345001A2C3F /* WeChatPriConfigCenter.m in Sources */,
 				04847F4A1F3409420050C32F /* fishhook.c in Sources */,
 				04847F501F3409420050C32F /* WeChatPriDylib.m in Sources */,
 				04847F471F3409420050C32F /* AntiAntiDebug.m in Sources */,
