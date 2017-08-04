@@ -91,6 +91,7 @@
 @interface CMessageMgr : NSObject
 
 - (void)DelMsg:(id)arg1 MsgList:(id)arg2 DelAll:(_Bool)arg3;
+- (void)AddMsg:(id)arg1 MsgWrap:(id)arg2;
 - (void)onRevokeMsg:(id)arg1;
 - (id)GetMsgByCreateTime:(id)arg1 FromID:(unsigned int)arg2 FromCreateTime:(unsigned int)arg3 Limit:(unsigned int)arg4 LeftCount:(unsigned int *)arg5 FromSequence:(unsigned int)arg6;
 - (void)AddLocalMsg:(id)arg1 MsgWrap:(id)arg2 fixTime:(_Bool)arg3 NewMsgArriveNotify:(_Bool)arg4;

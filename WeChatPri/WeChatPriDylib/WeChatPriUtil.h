@@ -12,4 +12,6 @@
 
 + (NSMutableArray * )filtMessageWrapArr:(NSMutableArray *)msgList;
 
++ (BOOL)compareColor:(UIColor *)color1 color2:(UIColor *)color2;
+
 @end

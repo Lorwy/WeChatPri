@@ -24,4 +24,18 @@
     return msgListResult;
 }
 
++ (BOOL)compareColor:(UIColor *)color1 color2:(UIColor *)color2
+{
+    if (color1 == color2) {
+        return YES;
+    }
+    CGFloat red1, red2, green1, green2, blue1, blue2;
+    [color1 getRed:&red1 green:&green1 blue:&blue1 alpha:nil];
+    [color2 getRed:&red2 green:&green2 blue:&blue2 alpha:nil];
+    if (fabs(red1-red2)<0.1 && fabs(green1-green2)<0.1 && fabs(blue1-blue2)<0.1) {
+        return YES;
+    }
+    return NO;
+}
+
 @end
