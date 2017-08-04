@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #pragma mark - Controller
+
 @interface FindFriendEntryViewController:UIViewController
 
 - (void)reloadData;

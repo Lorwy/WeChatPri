@@ -30,17 +30,11 @@ CHDeclareClass(NewSettingViewController)
 //CHDeclareClass(MMTableViewCellInfo)
 //CHDeclareClass(MMTableView)
 
-// 我的页面
-
 // 微信步数
 CHDeclareClass(WCDeviceStepObject)
 
 //
-CHDeclareClass(UIApplication)
 CHDeclareClass(MicroMessengerAppDelegate)
-
-//CHDeclareClass(UIApplication)
-//CHDeclareClass(MicroMessengerAppDelegate)
 CHDeclareClass(CMessageMgr)
 
 // 去掉小红点
@@ -57,8 +51,6 @@ CHDeclareClass(UILabel)
 // 防止消息撤回
 CHDeclareClass(ChatRoomInfoViewController)
 
-//
-CHDeclareClass(CMessageMgr);
 
 
 
@@ -193,42 +185,12 @@ CHOptimizedMethod1(self, void, UIView, didAddSubview, UIView *, subview)
 
 //MARK: 夜间模式
 
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
-blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
-alpha:1.0]
-
-#define nightBackgroundColor UIColorFromRGB(0x343434)
-#define nightSeparatorColor  UIColorFromRGB(0x313131)
-#define nightTextColor UIColorFromRGB(0xffffff)
-#define nightTabBarColor UIColorFromRGB(0x444444)
-
-void updateColorOfView(UIView *view)
-{
-    if ([view isKindOfClass:UILabel.class]) {
-        UILabel *label = (UILabel *)view;
-        [label setBackgroundColor:[UIColor clearColor]];
-        label.textColor = nightTextColor;
-        label.tintColor = nightTextColor;
-    }
-    else if ([view isKindOfClass:UIButton.class]) {
-        UIButton *button = (UIButton *)view;
-        button.tintColor = nightTextColor;
-    }
-    else {
-        [view setBackgroundColor:[UIColor clearColor]];
-        for (UIView *subview in view.subviews) {
-            updateColorOfView(subview);
-        }
-    }
-}
 
 CHDeclareMethod1(void, UIView, willMoveToSuperview, UIView *, newSuperview)
 {
     CHSuper1(UIView,willMoveToSuperview , newSuperview);
     if ([WeChatPriConfigCenter sharedInstance].isNightMode) {
-        updateColorOfView(self);
+        [WeChatPriUtil updateColorOfView:self];
     }
 }
 
@@ -236,7 +198,7 @@ CHDeclareMethod1(void, UIViewController, viewWillAppear, BOOL, animated)
 {
     CHSuper1(UIViewController, viewWillAppear, animated);
     if ([WeChatPriConfigCenter sharedInstance].isNightMode) {
-        updateColorOfView([self valueForKeyPath:@"view"]);
+        [WeChatPriUtil updateColorOfView:[self valueForKeyPath:@"view"]];
         [[self valueForKeyPath:@"view"] setBackgroundColor:nightBackgroundColor];
         [self setValue:nightTabBarColor forKeyPath:@"tabBarController.tabBar.barTintColor"];
         [self setValue:nightTabBarColor forKeyPath:@"tabBarController.tabBar.tintColor"];

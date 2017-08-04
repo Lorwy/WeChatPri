@@ -38,4 +38,24 @@
     return NO;
 }
 
++ (void)updateColorOfView:(UIView *)view
+{
+    if ([view isKindOfClass:UILabel.class]) {
+        UILabel *label = (UILabel *)view;
+        [label setBackgroundColor:[UIColor clearColor]];
+        label.textColor = nightTextColor;
+        label.tintColor = nightTextColor;
+    }
+    else if ([view isKindOfClass:UIButton.class]) {
+        UIButton *button = (UIButton *)view;
+        button.tintColor = nightTextColor;
+    }
+    else {
+        [view setBackgroundColor:[UIColor clearColor]];
+        for (UIView *subview in view.subviews) {
+            [WeChatPriUtil updateColorOfView:subview];
+        }
+    }
+}
+
 @end

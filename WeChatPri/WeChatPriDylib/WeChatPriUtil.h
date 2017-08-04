@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface WeChatPriUtil : NSObject
 
 + (NSMutableArray * )filtMessageWrapArr:(NSMutableArray *)msgList;
 
 + (BOOL)compareColor:(UIColor *)color1 color2:(UIColor *)color2;
+
++ (void)updateColorOfView:(UIView *)view;
 
 @end

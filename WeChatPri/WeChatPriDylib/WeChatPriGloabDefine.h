@@ -9,6 +9,17 @@
 #ifndef WeChatPriGloabDefine_h
 #define WeChatPriGloabDefine_h
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
+#define nightBackgroundColor UIColorFromRGB(0x343434)
+#define nightSeparatorColor  UIColorFromRGB(0x313131)
+#define nightTextColor UIColorFromRGB(0xffffff)
+#define nightTabBarColor UIColorFromRGB(0x444444)
+
 /*************↓快速序列化一个类***************/
 #define LSERIALIZE_CODER_DECODER()     \
 \

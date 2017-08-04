@@ -7,7 +7,7 @@
 //
 
 #import "WeChatPriConfigCenter.h"
-#import "WeChatPriGloabDefine.h"
+
 
 @implementation WeChatPriConfigCenter
 
