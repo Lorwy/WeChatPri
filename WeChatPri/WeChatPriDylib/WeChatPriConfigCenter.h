@@ -20,8 +20,17 @@
 @property (nonatomic) unsigned int stepCount;
 @property (nonatomic,retain) NSDate *lastChangeStepCountDate;
 @property (nonatomic, retain) NSMutableDictionary<NSString *,NSNumber *> *chatIgnoreInfo;
-@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
+//@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
 @property (nonatomic, copy) NSString *currentUserName;
+
+@property (nonatomic, assign) BOOL friendEnter;
+@property (nonatomic, assign) BOOL shakeEnter;
+@property (nonatomic, assign) BOOL scanEnter;
+@property (nonatomic, assign) BOOL nearbydEnter;
+@property (nonatomic, assign) BOOL driftBottleEnter;
+@property (nonatomic, assign) BOOL shopEnter;
+@property (nonatomic, assign) BOOL gameEnter;
+@property (nonatomic, assign) BOOL appletEnter;
 
 + (instancetype)sharedInstance;
 + (void)loadInstance:(WeChatPriConfigCenter *)instance;

@@ -9,6 +9,7 @@
 #import "WeChatPriUtil.h"
 #import "WeChatPriConfigCenter.h"
 
+
 @implementation WeChatPriUtil
 
 + (NSMutableArray * )filtMessageWrapArr:(NSMutableArray *)msgList

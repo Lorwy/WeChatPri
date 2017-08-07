@@ -36,10 +36,18 @@ LSERIALIZE_CODER_DECODER()
     WeChatPriConfigCenter *center = [self sharedInstance];
     center.nightMode = instance.isNightMode;
     center.stepCount = instance.stepCount;
-    center.revokeMsg = instance.onRevokeMsg;
+//    center.revokeMsg = instance.onRevokeMsg;
     center.chatIgnoreInfo = instance.chatIgnoreInfo;
     center.currentUserName = instance.currentUserName;
     center.lastChangeStepCountDate = instance.lastChangeStepCountDate;
+    center.friendEnter = instance.friendEnter;
+    center.shakeEnter = instance.shakeEnter;
+    center.scanEnter = instance.scanEnter;
+    center.nearbydEnter = instance.nearbydEnter;
+    center.driftBottleEnter = instance.driftBottleEnter;
+    center.shopEnter = instance.shopEnter;
+    center.gameEnter = instance.gameEnter;
+    center.appletEnter = instance.appletEnter;
 }
 
 #pragma mark - Handle Events
