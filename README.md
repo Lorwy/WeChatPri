@@ -12,21 +12,22 @@ Monkey：https://github.com/AloneMonkey/MonkeyDev
 
 1、屏蔽群消息，好友消息（对方无察觉）
 
-2、动态关闭发现页面功能入口
+2、动态关闭发现页面功能入口（可在我->设置->功能开关 页面设置）
 
-3、修改微信运动步数
+3、修改微信运动步数（在我->设置-中输入步数）
 
 4、去除各种小红点提示
 
 5、设置夜间模式
 
-6、阻止撤回消息
 
 
 
 锅神：https://github.com/buginux/WeChatRedEnvelop
 
-抢红包功能
+1、抢红包功能
+
+2、阻止撤回消息
 
 everettjf：https://github.com/everettjf
 
