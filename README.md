@@ -29,6 +29,21 @@ Monkey：https://github.com/AloneMonkey/MonkeyDev
 
 2、阻止撤回消息
 
-everettjf：https://github.com/everettjf
 
-非群主At所有人
+#Image
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2799.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2800.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2801.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2802.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2803.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2804.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2805.PNG
+
+https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2806.PNG
