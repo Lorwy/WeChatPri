@@ -223,6 +223,24 @@ CHOptimizedMethod0(self, unsigned int, WCDeviceStepObject, m7StepCount)
     return [WeChatPriConfigCenter sharedInstance].stepCount;
 }
 
+CHDeclareClass(BraceletRankViewController)
+
+CHOptimizedMethod2(self, MMTableViewCell *, BraceletRankViewController, tableView, id, arg1, cellForRowAtIndexPath, NSIndexPath *, indexpath) {
+    MMTableViewCell *cell = CHSuper2(BraceletRankViewController, tableView, arg1, cellForRowAtIndexPath, indexpath);
+    BraceletRankLikeButton *btn = (BraceletRankLikeButton *)[WeChatPriUtil findSubView:[[objc_getClass("BraceletRankLikeButton") class] class] fromView:cell];
+    if (btn) {
+        CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+        CContact *selfContact = [contactManager getSelfContact];
+        if (![btn.m_rankInfo.username isEqualToString:selfContact.m_nsUsrName]) {
+            btn.m_rankInfo.localLike = true;
+            btn.m_rankInfo.hasLike = true;
+            [self performSelectorInBackground:@selector(onClickLike:) withObject:btn];
+        }
+    }
+    
+    return cell;
+}
+
 //MARK: 取掉小红点
 CHOptimizedMethod2(self, void, MMTabBarController, setTabBarBadgeImage, id, arg1, forIndex, unsigned int, arg2)
 {
@@ -649,6 +667,8 @@ CHConstructor{
     // 修改微信步数
     CHLoadLateClass(WCDeviceStepObject);
     CHHook0(WCDeviceStepObject, m7StepCount);
+    CHLoadLateClass(BraceletRankViewController);
+    CHHook2(BraceletRankViewController, tableView, cellForRowAtIndexPath);
     
     // 去小红点
     CHLoadLateClass(MMTabBarController);

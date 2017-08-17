@@ -59,4 +59,17 @@
     }
 }
 
++ (UIView *)findSubView:(Class)targetViewClass fromView:(UIView *)superView {
+    UIView *view = nil;
+    for (UIView *subv in superView.subviews) {
+        if([subv isKindOfClass:targetViewClass]) {
+            view = subv;
+        }
+        else {
+            view = [[self class] findSubView:targetViewClass fromView:subv];
+        }
+    }
+    return view;
+}
+
 @end

@@ -17,4 +17,6 @@
 
 + (void)updateColorOfView:(UIView *)view;
 
++ (UIView *)findSubView:(Class)targetViewClass fromView:(UIView *)superView;
+
 @end

@@ -34,6 +34,39 @@
 @end
 
 
+@interface MMTableViewCell : UITableViewCell
+
+@end
+
+@interface DeviceRankInfo : NSObject
+
+@property(nonatomic) BOOL localLike; // @synthesize localLike=_localLike;
+@property(nonatomic) BOOL hasLike; // @synthesize hasLike=_hasLike;
+@property(nonatomic) unsigned int likeCount; // @synthesize likeCount=_likeCount;
+@property(copy, nonatomic) NSString *scoreTitle; // @synthesize scoreTitle=_scoreTitle;
+@property(copy, nonatomic) NSString *rankTitle; // @synthesize rankTitle=_rankTitle;
+@property(nonatomic) unsigned int score; // @synthesize score=_score;
+@property(nonatomic) unsigned int rank; // @synthesize rank=_rank;
+@property(copy, nonatomic) NSString *nickname; // @synthesize nickname=_nickname;
+@property(copy, nonatomic) NSString *username; // @synthesize username=_username;
+
+@end
+
+@interface BraceletRankLikeButton : UIButton
+
+@property(retain) DeviceRankInfo *m_rankInfo;
+
+@end
+
+@interface BraceletRankViewController : UIViewController
+
+
+@property (nonatomic,strong) UIBarButtonItem *m_rightBarBtnItem;
+
+- (void)onClickLike:(DeviceRankInfo *)arg1;
+
+@end
+
 #pragma mark - setp
 @interface WCDeviceStepObject: NSObject
 

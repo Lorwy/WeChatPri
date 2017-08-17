@@ -591,7 +591,6 @@
 					"/usr/lib/libc++.dylib",
 					"-weak_library",
 					"/usr/lib/libstdc++.dylib",
-					"-lsubstrate",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -642,7 +641,6 @@
 					"/usr/lib/libc++.dylib",
 					"-weak_library",
 					"/usr/lib/libstdc++.dylib",
-					"-lsubstrate",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
