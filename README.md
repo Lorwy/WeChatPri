@@ -7,6 +7,7 @@
 Monkey：https://github.com/AloneMonkey/MonkeyDev
 
 【√】新增步数排行榜自动点赞功能
+
 【×】朋友圈浏览自动点赞功能尚在yy中
 
 站在大佬们的肩膀上用MonkeyDev做了自己用的微信，主要有以下功能：
@@ -37,16 +38,17 @@ Monkey：https://github.com/AloneMonkey/MonkeyDev
 
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155037.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155604.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155604.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155713.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155713.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155751.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155751.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155824.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155824.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155905.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155905.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155941.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155941.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-160010.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-160010.png)
+          
