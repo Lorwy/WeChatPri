@@ -2,9 +2,12 @@
 个人版微信
 
 # 功能介绍
-感谢以下大佬：Monkey、锅神、鱼神、everettjf等等。。。
+感谢以下大佬：Monkey、锅神、鱼神等等。。。
 
 Monkey：https://github.com/AloneMonkey/MonkeyDev
+
+【√】新增步数排行榜自动点赞功能
+【×】朋友圈浏览自动点赞功能尚在yy中
 
 站在大佬们的肩膀上用MonkeyDev做了自己用的微信，主要有以下功能：
 
@@ -32,7 +35,7 @@ Monkey：https://github.com/AloneMonkey/MonkeyDev
 
 #Image
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2799.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155037.png)
 
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/IMG_2800.PNG)
 
