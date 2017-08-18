@@ -36,7 +36,7 @@ LSERIALIZE_CODER_DECODER()
     WeChatPriConfigCenter *center = [self sharedInstance];
     center.nightMode = instance.isNightMode;
     center.stepCount = instance.stepCount;
-//    center.revokeMsg = instance.onRevokeMsg;
+    center.stepAutoLike = instance.stepAutoLike;
     center.chatIgnoreInfo = instance.chatIgnoreInfo;
     center.currentUserName = instance.currentUserName;
     center.lastChangeStepCountDate = instance.lastChangeStepCountDate;
@@ -56,6 +56,10 @@ LSERIALIZE_CODER_DECODER()
 {
     self.nightMode = sender.isOn;
     [[self viewControllerOfResponder:sender] viewWillAppear:NO];
+}
+
+- (void)handleStepAutoLike:(UISwitch *)sender {
+    self.stepAutoLike = sender.isOn;
 }
 
 - (void)handleStepCount:(UITextField *)sender

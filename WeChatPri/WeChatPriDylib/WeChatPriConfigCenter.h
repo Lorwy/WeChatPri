@@ -18,6 +18,7 @@
 
 @property (nonatomic, getter = isNightMode) BOOL nightMode;
 @property (nonatomic) unsigned int stepCount;
+@property (nonatomic, getter = isStepAutoLike) BOOL stepAutoLike;
 @property (nonatomic,retain) NSDate *lastChangeStepCountDate;
 @property (nonatomic, retain) NSMutableDictionary<NSString *,NSNumber *> *chatIgnoreInfo;
 //@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
@@ -36,6 +37,7 @@
 + (void)loadInstance:(WeChatPriConfigCenter *)instance;
 
 - (void)handleNightMode:(UISwitch *)sender;
+- (void)handleStepAutoLike:(UISwitch *)sender;
 - (void)handleStepCount:(UITextField *)sender;
 - (void)handleIgnoreChatRoom:(UISwitch *)sender;
 

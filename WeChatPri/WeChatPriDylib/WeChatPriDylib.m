@@ -178,6 +178,9 @@ CHDeclareMethod0(void, NewSettingViewController, reloadTableData)
     // 加一个开启夜间模式的cell
     MMTableViewCellInfo *nightCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleNightMode:) target:[WeChatPriConfigCenter sharedInstance] title:@"夜间模式" on:[WeChatPriConfigCenter sharedInstance].isNightMode];
     [sectionInfo addCell:nightCellInfo];
+    // 加一个开启步数排行榜页面自动点赞开关的cell
+    MMTableViewCellInfo *autoLikeCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleStepAutoLike:) target:[WeChatPriConfigCenter sharedInstance] title:@"步数排行榜浏览自动点赞" on:[WeChatPriConfigCenter sharedInstance].isStepAutoLike];
+    [sectionInfo addCell:autoLikeCellInfo];
     // 加一个输入步数的cell
     MMTableViewCellInfo *stepcountCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleStepCount:) target:[WeChatPriConfigCenter sharedInstance] tip:@"请输入步数" focus:NO text:[NSString stringWithFormat:@"%ld", (long)[WeChatPriConfigCenter sharedInstance].stepCount]];
     [sectionInfo addCell:stepcountCellInfo];
@@ -205,7 +208,7 @@ CHDeclareMethod0(void, NewSettingViewController, simplifySetting) {
     [self.navigationController PushViewController:settingViewController animated:YES];
 }
 
-//MARK: 微信运动步数
+//MARK:                       
 CHOptimizedMethod0(self, unsigned int, WCDeviceStepObject, m7StepCount)
 {
     NSCalendar *cal = [NSCalendar currentCalendar];
@@ -223,21 +226,23 @@ CHOptimizedMethod0(self, unsigned int, WCDeviceStepObject, m7StepCount)
     return [WeChatPriConfigCenter sharedInstance].stepCount;
 }
 
+// 自动点赞
 CHDeclareClass(BraceletRankViewController)
 
 CHOptimizedMethod2(self, MMTableViewCell *, BraceletRankViewController, tableView, id, arg1, cellForRowAtIndexPath, NSIndexPath *, indexpath) {
     MMTableViewCell *cell = CHSuper2(BraceletRankViewController, tableView, arg1, cellForRowAtIndexPath, indexpath);
-    BraceletRankLikeButton *btn = (BraceletRankLikeButton *)[WeChatPriUtil findSubView:[[objc_getClass("BraceletRankLikeButton") class] class] fromView:cell];
-    if (btn) {
-        CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
-        CContact *selfContact = [contactManager getSelfContact];
-        if (![btn.m_rankInfo.username isEqualToString:selfContact.m_nsUsrName]) {
-            btn.m_rankInfo.localLike = true;
-            btn.m_rankInfo.hasLike = true;
-            [self performSelectorInBackground:@selector(onClickLike:) withObject:btn];
+    if([WeChatPriConfigCenter sharedInstance].isStepAutoLike) {
+        BraceletRankLikeButton *btn = (BraceletRankLikeButton *)[WeChatPriUtil findSubView:[[objc_getClass("BraceletRankLikeButton") class] class] fromView:cell];
+        if (btn) {
+            CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+            CContact *selfContact = [contactManager getSelfContact];
+            if (![btn.m_rankInfo.username isEqualToString:selfContact.m_nsUsrName]) {
+                btn.m_rankInfo.localLike = true;
+                btn.m_rankInfo.hasLike = true;
+                [self performSelectorInBackground:@selector(onClickLike:) withObject:btn];
+            }
         }
     }
-    
     return cell;
 }
 
@@ -653,6 +658,64 @@ CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, CMessageWrap *, arg1)
     }
 }
 
+// MARK: 朋友圈
+//CHDeclareClass(WCOperateFloatView)
+//CHOptimizedMethod1(self, void, WCOperateFloatView, onLikeItem, id, arg1) {
+//    CHSuper1(WCOperateFloatView, onLikeItem, arg1);
+//}
+//
+//CHOptimizedMethod2(self, void, WCOperateFloatView, showWithItemData, WCDataItem *, arg1, tipPoint, struct CGPoint, arg2) {
+//    CHSuper2(WCOperateFloatView, showWithItemData, arg1, tipPoint, arg2);
+//    if (arg2.x < 0 && !arg1.likeFlag) {
+////        [self onLikeItem:arg1];
+//        [self performSelector:@selector(onLikeItem:) withObject:arg1 afterDelay:2];
+//    }
+//}
+//
+//
+////
+//CHDeclareClass(WCTimeLineViewController)
+//
+//CHOptimizedMethod0(self, void, WCTimeLineViewController, viewDidLoad) {
+//    CHSuper0(WCTimeLineViewController, viewDidLoad);
+//}
+//
+//CHOptimizedMethod2(self, UITableViewCell *, WCTimeLineViewController, tableView, id, arg1, cellForRowAtIndexPath, NSIndexPath *, indexpath) {
+//    
+//    UITableViewCell *cell = CHSuper2(WCTimeLineViewController, tableView, arg1, cellForRowAtIndexPath, indexpath);
+//    WCTimeLineCellView *cellView = (WCTimeLineCellView *)[WeChatPriUtil findSubView:[[objc_getClass("WCTimeLineCellView") class] class]
+//                                                                           fromView:cell];
+//    
+//    UIButton *lorwyButton = [cellView viewWithTag:9998];
+//    if (!lorwyButton) {
+//        lorwyButton = [[UIButton alloc] initWithFrame:CGRectMake(-20, 0, 20, 20)];
+//        lorwyButton.backgroundColor =[UIColor orangeColor];
+//        lorwyButton.tag = 9998;
+//        [cellView addSubview:lorwyButton];
+//    }
+//    [cellView performSelectorOnMainThread:@selector(onCommentPhoto:) withObject:lorwyButton waitUntilDone:NO];
+//    return cell;
+//}
+//
+//
+////
+//CHDeclareClass(WCTimeLineCellView)
+//CHOptimizedMethod1(self, void, WCTimeLineCellView, onCommentPhoto, id , arg1) {
+//    CHSuper1(WCTimeLineCellView, onCommentPhoto, arg1);
+//}
+//
+//
+//
+////
+//CHDeclareClass(WCLikeButton)
+//CHOptimizedMethod1(self, void, WCLikeButton, initWithDataItem, id, arg1) {
+//    CHSuper1(WCLikeButton, initWithDataItem, arg1);
+//}
+//
+//CHOptimizedMethod0(self, void, WCLikeButton, onLikeFriend) {
+//    CHSuper0(WCLikeButton, onLikeFriend);
+//}
+
 CHConstructor{
     // 存取本地配置
     CHLoadLateClass(MicroMessengerAppDelegate);
@@ -687,5 +750,22 @@ CHConstructor{
     CHLoadLateClass(WCRedEnvelopesLogicMgr);
     CHHook2(WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, Request);
     CHHook2(CMessageMgr, AsyncOnAddMsg, MsgWrap);
+    
+    // 朋友圈
+//    CHLoadLateClass(WCOperateFloatView);
+//    CHHook1(WCOperateFloatView, onLikeItem);
+//    CHHook2(WCOperateFloatView, showWithItemData, tipPoint);
+//    
+//    CHLoadLateClass(WCTimeLineViewController);
+//    CHHook2(WCTimeLineViewController, tableView, cellForRowAtIndexPath);
+//    CHHook0(WCTimeLineViewController, viewDidLoad);
+//    
+//    CHLoadLateClass(WCTimeLineCellView);
+//    CHHook1(WCTimeLineCellView, onCommentPhoto);
+//    
+//    
+//    CHLoadLateClass(WCLikeButton);
+//    CHHook1(WCLikeButton, initWithDataItem);
+//    CHHook0(WCLikeButton, onLikeFriend);
 }
 

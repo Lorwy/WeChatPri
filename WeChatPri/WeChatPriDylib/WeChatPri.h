@@ -67,6 +67,30 @@
 
 @end
 
+#pragma mark - timeline
+@interface WCDataItem : NSObject
+
+@property(nonatomic) BOOL likeFlag; // @synthesize likeFlag;
+
+@end
+
+@interface WCOperateFloatView: UIView
+
+- (void)onLikeItem:(id)arg1;
+- (void)showWithItemData:(id)arg1 tipPoint:(struct CGPoint)arg2;
+
+@end
+
+@interface WCTimeLineViewController : UIViewController
+
+@end
+
+@interface WCTimeLineCellView : UIView
+
+- (void)onCommentPhoto:(id)arg1;
+
+@end
+
 #pragma mark - setp
 @interface WCDeviceStepObject: NSObject
 
