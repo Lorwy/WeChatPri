@@ -19,6 +19,7 @@
 @property (nonatomic, getter = isNightMode) BOOL nightMode;
 @property (nonatomic) unsigned int stepCount;
 @property (nonatomic, getter = isStepAutoLike) BOOL stepAutoLike;
+@property (nonatomic, getter = isShowMsgInWebPage) BOOL showMsgInWebPage;
 @property (nonatomic,retain) NSDate *lastChangeStepCountDate;
 @property (nonatomic, retain) NSMutableDictionary<NSString *,NSNumber *> *chatIgnoreInfo;
 //@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
@@ -38,6 +39,7 @@
 
 - (void)handleNightMode:(UISwitch *)sender;
 - (void)handleStepAutoLike:(UISwitch *)sender;
+- (void)handleShowMsgInWebPage:(UISwitch *)sender;
 - (void)handleStepCount:(UITextField *)sender;
 - (void)handleIgnoreChatRoom:(UISwitch *)sender;
 

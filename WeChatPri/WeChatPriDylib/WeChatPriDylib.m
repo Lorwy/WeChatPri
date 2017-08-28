@@ -183,6 +183,9 @@ CHDeclareMethod0(void, NewSettingViewController, reloadTableData)
     // 加一个开启步数排行榜页面自动点赞开关的cell
     MMTableViewCellInfo *autoLikeCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleStepAutoLike:) target:[WeChatPriConfigCenter sharedInstance] title:@"步数排行榜浏览自动点赞" on:[WeChatPriConfigCenter sharedInstance].isStepAutoLike];
     [sectionInfo addCell:autoLikeCellInfo];
+    // 加一个开启webpage消息提醒的开关
+    MMTableViewCellInfo *showMsgInWebPageCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleShowMsgInWebPage:) target:[WeChatPriConfigCenter sharedInstance] title:@"聊天网页无缝切换" on:[WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage];
+    [sectionInfo addCell:showMsgInWebPageCellInfo];
     // 加一个输入步数的cell
     MMTableViewCellInfo *stepcountCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleStepCount:) target:[WeChatPriConfigCenter sharedInstance] tip:@"请输入步数" focus:NO text:[NSString stringWithFormat:@"%ld", (long)[WeChatPriConfigCenter sharedInstance].stepCount]];
     [sectionInfo addCell:stepcountCellInfo];
@@ -395,18 +398,31 @@ CHDeclareMethod1(void, BaseMsgContentViewController, viewDidAppear, BOOL, animat
 
 // MARK: 网页和聊天页面的快速切换
 // 在聊天界面加上快速返回网页的按钮
-CHDeclareMethod0(void, BaseMsgContentViewController, viewDidLoad)
+CHDeclareMethod1(void, BaseMsgContentViewController, viewWillAppear, BOOL, animated)
 {
-    CHSuper0(BaseMsgContentViewController, viewDidLoad);
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80, 74, 80, 40)];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [button setTitle:@"网页" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(backToWebViewController) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    CHSuper1(BaseMsgContentViewController, viewWillAppear, animated);
+    
+    UIButton *btn = [self.view viewWithTag:8899];
+    if ([WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage && [WeChatNewsMsgManager sharedInstance].webViewViewControllers) {
+        if (!btn) {
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80, 74, 80, 40)];
+            [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [button setTitle:@"网页" forState:UIControlStateNormal];
+            button.tag = 8899;
+            [button addTarget:self action:@selector(backToWebViewController) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:button];
+        }
+        [self.view bringSubviewToFront:btn];
+    } else {
+        if (btn) {
+            [btn removeFromSuperview];
+            btn = nil;
+        }
+    }
 }
 
 CHDeclareMethod0(void, BaseMsgContentViewController, backToWebViewController) {
-    // 从两天界面到网页
+    // 从聊天界面到网页
     NSArray *webViewViewControllers = [WeChatNewsMsgManager sharedInstance].webViewViewControllers;
     if (webViewViewControllers) {
         [[objc_getClass("CAppViewControllerManager") getCurrentNavigationController] setViewControllers:webViewViewControllers animated:YES];
@@ -438,17 +454,22 @@ CHDeclareMethod0(void, MMWebViewController, viewDidLoad)
 
 CHDeclareMethod0(void, MMWebViewController, didReceiveNewMessage) {
     
+    if (![WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage) {
+        [WeChatNewsMsgManager sharedInstance].webViewViewControllers = nil;
+        return;
+    }
+    
     NSString *username = [WeChatNewsMsgManager sharedInstance].username;
     NSString *content = [WeChatNewsMsgManager sharedInstance].content;
     CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
     CContact *selfContact = [contactManager getSelfContact];
-    if ([selfContact.m_nsUsrName isEqualToString:username]) {
-        // 自己从其他端登录的不管
-        return;
-    }
     
     CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
     CContact *contact = [contactMgr getContactByName:username];
+    if ([selfContact.m_nsUsrName isEqualToString:contact.m_nsUsrName]) {
+        // 自己从其他端登录的不管
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *text = [NSString stringWithFormat:@"  %@: %@  ", contact.m_nsNickName, content];
         [WeChatNewsMsgManager showHUDInView:self.view text:text target:self action:@selector(backToMsgContentViewController)];
@@ -840,12 +861,7 @@ CHConstructor{
 //    CHLoadLateClass(WCLikeButton);
 //    CHHook1(WCLikeButton, initWithDataItem);
 //    CHHook0(WCLikeButton, onLikeFriend);
-    
-//    CHLoadLateClass(MMWebViewController);
-//    CHHook1(MMWebViewController, viewDidLoad);
-//    
-//    CHLoadLateClass(BaseMsgContentViewController);
-//    CHHook1(BaseMsgContentViewController, viewDidLoad);
+
     
 }
 
