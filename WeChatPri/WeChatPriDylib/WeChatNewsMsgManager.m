@@ -7,6 +7,7 @@
 //
 
 #import "WeChatNewsMsgManager.h"
+#import "UILabel+AutoResize.h"
 
 static UIButton* contentView;
 
@@ -54,7 +55,10 @@ static UIButton* contentView;
     [contentView setTitle:text forState:UIControlStateNormal];
     
     [contentView addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    contentView.frame = CGRectMake(10, 74, superView.frame.size.width -  20, 30);
+    
+    CGFloat textWidth = MIN([contentView.titleLabel autoResizeWidthWithHeight:30], superView.frame.size.width -  20);
+    
+    contentView.frame = CGRectMake((superView.frame.size.width - textWidth) / 2.0, 74, textWidth, 30);
     return contentView;
 }
 

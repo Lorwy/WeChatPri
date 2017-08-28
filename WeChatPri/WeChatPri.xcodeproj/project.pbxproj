@@ -50,6 +50,8 @@
 		04A613A71F53AB1900206D63 /* WeChatNewsMsgManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A613A51F53AB1900206D63 /* WeChatNewsMsgManager.m */; };
 		04A613AB1F53B46700206D63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A613AA1F53B46700206D63 /* CoreGraphics.framework */; };
 		04A613B31F53BF8600206D63 /* if_Safari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A613A91F53AE4000206D63 /* if_Safari@2x.png */; };
+		04A613CC1F5412E100206D63 /* UILabel+AutoResize.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A613CA1F5412E100206D63 /* UILabel+AutoResize.h */; };
+		04A613CD1F5412E100206D63 /* UILabel+AutoResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A613CB1F5412E100206D63 /* UILabel+AutoResize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,8 @@
 		04A613A51F53AB1900206D63 /* WeChatNewsMsgManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatNewsMsgManager.m; sourceTree = "<group>"; };
 		04A613A91F53AE4000206D63 /* if_Safari@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "if_Safari@2x.png"; sourceTree = "<group>"; };
 		04A613AA1F53B46700206D63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		04A613CA1F5412E100206D63 /* UILabel+AutoResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AutoResize.h"; sourceTree = "<group>"; };
+		04A613CB1F5412E100206D63 /* UILabel+AutoResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AutoResize.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +216,7 @@
 		04847F3A1F3409420050C32F /* WeChatPriDylib */ = {
 			isa = PBXGroup;
 			children = (
+				04A613C91F5412E100206D63 /* Category */,
 				04A613A81F53AE4000206D63 /* Images */,
 				0434C0E11F380C1200B49000 /* RedEnvelop */,
 				04847F431F3409420050C32F /* WeChatPriDylib-Prefix.pch */,
@@ -277,6 +282,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		04A613C91F5412E100206D63 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				04A613CA1F5412E100206D63 /* UILabel+AutoResize.h */,
+				04A613CB1F5412E100206D63 /* UILabel+AutoResize.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -302,6 +316,7 @@
 				0434C0FF1F380C1200B49000 /* WBSettingViewController.h in Headers */,
 				0434C0FB1F380C1200B49000 /* WBRedEnvelopParamQueue.h in Headers */,
 				0434C0FD1F380C1200B49000 /* WBRedEnvelopTaskManager.h in Headers */,
+				04A613CC1F5412E100206D63 /* UILabel+AutoResize.h in Headers */,
 				049AC3761F345345001A2C3F /* WeChatPriGloabDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +456,7 @@
 				04847F501F3409420050C32F /* WeChatPriDylib.m in Sources */,
 				0434C0FC1F380C1200B49000 /* WBRedEnvelopParamQueue.m in Sources */,
 				04847F471F3409420050C32F /* AntiAntiDebug.m in Sources */,
+				04A613CD1F5412E100206D63 /* UILabel+AutoResize.m in Sources */,
 				048029581F349D5E00ED0E14 /* WeChatPriUtil.m in Sources */,
 				0434C1031F380C1200B49000 /* WeChatRedEnvelopParam.m in Sources */,
 				0434C0F81F380C1200B49000 /* WBReceiveRedEnvelopOperation.m in Sources */,
