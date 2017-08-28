@@ -13,11 +13,14 @@
 
 @property (nonatomic,strong) NSString *username;
 @property (nonatomic,strong) NSString *content;
+@property (nonatomic,strong) NSString *fromUserName;
 @property (nonatomic,strong) NSArray *webViewViewControllers;
 
 + (instancetype)sharedInstance;
 
-+ (void)receiveNewMsg:(NSString *)userName content:(NSString *)content;
++ (void)receiveNewMsg:(NSString *)userName
+              content:(NSString *)content
+         fromUserName:(NSString *)fromUserName;
 
 + (UIButton *)showHUDInView:(UIView *) superView
                  text:(NSString *)text

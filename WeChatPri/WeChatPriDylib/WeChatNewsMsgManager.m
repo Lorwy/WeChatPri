@@ -23,10 +23,13 @@ static UIButton* contentView;
     return instance;
 }
 
-+ (void)receiveNewMsg:(NSString *)userName content:(NSString *)content {
++ (void)receiveNewMsg:(NSString *)userName
+              content:(NSString *)content
+         fromUserName:(NSString *)fromUserName {
     
     [WeChatNewsMsgManager sharedInstance].username = userName;
     [WeChatNewsMsgManager sharedInstance].content = content;
+    [WeChatNewsMsgManager sharedInstance].fromUserName = fromUserName;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KweChatNewMessageNotification object:nil];
     
@@ -49,11 +52,9 @@ static UIButton* contentView;
     [superView addSubview:contentView];
     
     [contentView setTitle:text forState:UIControlStateNormal];
-    [contentView sizeToFit];
     
     [contentView addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    contentView.frame = CGRectMake((superView.frame.size.width - contentView.bounds.size.width)*0.5, 74, contentView.bounds.size.width, contentView.bounds.size.height);
-    [[self class] hideMsgHudAfterDelay:10];
+    contentView.frame = CGRectMake(10, 74, superView.frame.size.width -  20, 30);
     return contentView;
 }
 

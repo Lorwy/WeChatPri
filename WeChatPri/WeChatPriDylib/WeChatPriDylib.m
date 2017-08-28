@@ -466,7 +466,7 @@ CHDeclareMethod0(void, MMWebViewController, didReceiveNewMessage) {
     
     CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
     CContact *contact = [contactMgr getContactByName:username];
-    if ([selfContact.m_nsUsrName isEqualToString:contact.m_nsUsrName]) {
+    if ([selfContact.m_nsUsrName isEqualToString:[WeChatNewsMsgManager sharedInstance].fromUserName]) {
         // 自己从其他端登录的不管
         return;
     }
@@ -604,7 +604,9 @@ CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString *, msg, MsgW
     CHSuper2(CMessageMgr, AsyncOnAddMsg, msg, MsgWrap, wrap);
     
     // web和聊天界面的快速切换
-    [WeChatNewsMsgManager receiveNewMsg:msg content:wrap.m_nsContent];
+    [WeChatNewsMsgManager receiveNewMsg:msg
+                                content:wrap.m_nsContent
+                           fromUserName:wrap.m_nsFromUsr];
     
     switch(wrap.m_uiMessageType) {
         case 49: { // AppNode
