@@ -214,9 +214,12 @@
 
 @end
 
-@interface MMWebViewController: NSObject
+@interface MMWebViewController: UIViewController
 
 - (id)initWithURL:(id)arg1 presentModal:(_Bool)arg2 extraInfo:(id)arg3;
+
+-  (void)didReceiveNewMessage;
+- (void)backToMsgContentViewController;
 
 @end
 

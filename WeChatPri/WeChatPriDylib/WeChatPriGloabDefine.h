@@ -20,6 +20,9 @@ alpha:1.0]
 #define nightTextColor UIColorFromRGB(0xffffff)
 #define nightTabBarColor UIColorFromRGB(0x444444)
 
+// Notif
+#define KweChatNewMessageNotification @"KweChatNewMessageNotification"
+
 /*************↓快速序列化一个类***************/
 #define LSERIALIZE_CODER_DECODER()     \
 \

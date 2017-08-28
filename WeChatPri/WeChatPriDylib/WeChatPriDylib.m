@@ -28,6 +28,8 @@
 
 #import "SimplifyWeChatController.h"
 
+#import "WeChatNewsMsgManager.h"
+
 #define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
 
 // 发现页面
@@ -391,6 +393,27 @@ CHDeclareMethod1(void, BaseMsgContentViewController, viewDidAppear, BOOL, animat
     [WeChatPriConfigCenter sharedInstance].currentUserName = [contact valueForKey:@"m_nsUsrName"];
 }
 
+// MARK: 网页和聊天页面的快速切换
+// 在聊天界面加上快速返回网页的按钮
+CHDeclareMethod0(void, BaseMsgContentViewController, viewDidLoad)
+{
+    CHSuper0(BaseMsgContentViewController, viewDidLoad);
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80, 74, 80, 40)];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button setTitle:@"网页" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(backToWebViewController) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
+CHDeclareMethod0(void, BaseMsgContentViewController, backToWebViewController) {
+    // 从两天界面到网页
+    NSArray *webViewViewControllers = [WeChatNewsMsgManager sharedInstance].webViewViewControllers;
+    if (webViewViewControllers) {
+        [[objc_getClass("CAppViewControllerManager") getCurrentNavigationController] setViewControllers:webViewViewControllers animated:YES];
+    }
+}
+
+
 CHDeclareMethod0(void, ChatRoomInfoViewController, reloadTableData)
 {
     CHSuper0(ChatRoomInfoViewController, reloadTableData);
@@ -403,6 +426,53 @@ CHDeclareMethod0(void, ChatRoomInfoViewController, reloadTableData)
     [tableView reloadData];
 }
 
+CHDeclareClass(MMWebViewController)
+CHDeclareMethod0(void, MMWebViewController, viewDidLoad)
+{
+    CHSuper0(MMWebViewController, viewDidLoad);
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveNewMessage)
+                                                 name:KweChatNewMessageNotification
+                                               object:nil];
+}
+
+CHDeclareMethod0(void, MMWebViewController, didReceiveNewMessage) {
+    
+    NSString *username = [WeChatNewsMsgManager sharedInstance].username;
+    NSString *content = [WeChatNewsMsgManager sharedInstance].content;
+    CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+    CContact *selfContact = [contactManager getSelfContact];
+    if ([selfContact.m_nsUsrName isEqualToString:username]) {
+        // 自己从其他端登录的不管
+        return;
+    }
+    
+    CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+    CContact *contact = [contactMgr getContactByName:username];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *text = [NSString stringWithFormat:@"  %@: %@  ", contact.m_nsNickName, content];
+        [WeChatNewsMsgManager showHUDInView:self.view text:text target:self action:@selector(backToMsgContentViewController)];
+    });
+}
+
+CHDeclareMethod0(void, MMWebViewController, backToMsgContentViewController) {
+    // 返回聊天界面ViewController前记录当前navigationController的VC堆栈，以便快速返回
+    NSArray *webViewViewControllers = [objc_getClass("CAppViewControllerManager") getCurrentNavigationController].viewControllers;
+    [WeChatNewsMsgManager sharedInstance].webViewViewControllers = webViewViewControllers;
+    
+    // 返回rootViewController
+    UINavigationController *navVC = [objc_getClass("CAppViewControllerManager") getCurrentNavigationController];
+    [navVC popToRootViewControllerAnimated:NO];
+    
+    // 进入聊天界面ViewController
+    NSString *username = [WeChatNewsMsgManager sharedInstance].username;
+    CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+    CContact *contact = [contactMgr getContactByName:username];
+    MMMsgLogicManager *logicMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("MMMsgLogicManager") class]];
+    [logicMgr PushOtherBaseMsgControllerByContact:contact navigationController:navVC animated:YES];
+}
+
+// MARK : 屏蔽消息
 CHDeclareClass(AddContactToChatRoomViewController)
 
 CHDeclareMethod0(void, AddContactToChatRoomViewController, reloadTableData)
@@ -511,6 +581,9 @@ CHDeclareMethod0(unsigned int, WCRedEnvelopesLogicMgr, calculateDelaySeconds) {
 // CMessageMgr
 CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString *, msg, MsgWrap, CMessageWrap *, wrap){
     CHSuper2(CMessageMgr, AsyncOnAddMsg, msg, MsgWrap, wrap);
+    
+    // web和聊天界面的快速切换
+    [WeChatNewsMsgManager receiveNewMsg:msg content:wrap.m_nsContent];
     
     switch(wrap.m_uiMessageType) {
         case 49: { // AppNode
@@ -767,5 +840,12 @@ CHConstructor{
 //    CHLoadLateClass(WCLikeButton);
 //    CHHook1(WCLikeButton, initWithDataItem);
 //    CHHook0(WCLikeButton, onLikeFriend);
+    
+//    CHLoadLateClass(MMWebViewController);
+//    CHHook1(MMWebViewController, viewDidLoad);
+//    
+//    CHLoadLateClass(BaseMsgContentViewController);
+//    CHHook1(BaseMsgContentViewController, viewDidLoad);
+    
 }
 

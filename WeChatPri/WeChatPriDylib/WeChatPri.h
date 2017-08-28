@@ -22,6 +22,20 @@
 
 - (id)GetContact;
 
+- (void)backToWebViewController;
+
+@end
+
+@interface CAppViewControllerManager : NSObject
+
++ (UINavigationController *)getCurrentNavigationController;
+
+@end
+
+@interface MMMsgLogicManager : NSObject
+
+- (void)PushOtherBaseMsgControllerByContact:(id)arg1 navigationController:(id)arg2 animated:(_Bool)arg3;
+
 @end
 
 
