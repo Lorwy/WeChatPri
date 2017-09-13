@@ -19,4 +19,7 @@
 
 + (UIView *)findSubView:(Class)targetViewClass fromView:(UIView *)superView;
 
++ (CMessageWrap *)setDice:(CMessageWrap *)wrap point:(unsigned int) point;
++ (CMessageWrap *)setRPS:(CMessageWrap *)wrap type:(unsigned int) type;
+
 @end

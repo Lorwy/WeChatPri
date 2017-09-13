@@ -50,6 +50,9 @@
 - (id)GetMsgByCreateTime:(id)arg1 FromID:(unsigned int)arg2 FromCreateTime:(unsigned int)arg3 Limit:(unsigned int)arg4 LeftCount:(unsigned int *)arg5 FromSequence:(unsigned int)arg6;
 - (void)AddLocalMsg:(id)arg1 MsgWrap:(id)arg2 fixTime:(_Bool)arg3 NewMsgArriveNotify:(_Bool)arg4;
 - (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2;
+- (void)MessageReturn:(unsigned int)arg1 MessageInfo:(id)arg2 Event:(unsigned int)arg3;
+
+- (void)AddEmoticonMsg:(id)arg1 MsgWrap:(id)arg2;
 
 // new
 - (void)addAutoVerifyWithArray:(NSArray *)ary arrayType:(TKArrayTpye)type;
@@ -100,6 +103,9 @@
 
 @property (nonatomic, copy) NSString *m_nsLastDisplayContent;
 @property (nonatomic, copy) NSString *m_nsPushContent;
+
+@property(nonatomic) unsigned int m_uiGameType;     // 游戏类型
+@property(nonatomic) unsigned int m_uiGameContent;  // 游戏内容
 
 - (id)initWithMsgType:(long long)arg1;
 + (_Bool)isSenderFromMsgWrap:(id)arg1;
@@ -436,6 +442,7 @@
 - (void)reloadTableData;
 - (void)setting;
 - (void)simplifySetting;
+- (void)groupSetting;
 
 @end
 

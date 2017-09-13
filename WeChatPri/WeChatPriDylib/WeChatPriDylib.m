@@ -962,6 +962,74 @@ CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, CMessageWrap *, arg1)
     }
 }
 
+// MARK: 自定义游戏结果
+CHOptimizedMethod2(self, void, CMessageMgr, AddEmoticonMsg, id, arg1, MsgWrap, id, arg2){
+    CMessageWrap *wrap = (CMessageWrap *)arg2;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger diceNumber = [userDefaults integerForKey:@"WeChatTweakCustomDiceNumberKey"];
+    NSInteger rpsResult = [userDefaults integerForKey:@"WeChatTweakCustomRPSResultKey"];
+    if (wrap.m_uiGameType == 2) {
+        if (diceNumber) {
+            CHSuper2(CMessageMgr, AddEmoticonMsg, arg1, MsgWrap, [WeChatPriUtil setDice:arg2 point:diceNumber]);
+        } else {
+            CHSuper2(CMessageMgr, AddEmoticonMsg, arg1, MsgWrap, arg2);
+        }
+    } else if (wrap.m_uiGameType == 1) {
+        if (rpsResult) {
+            CHSuper2(CMessageMgr, AddEmoticonMsg, arg1, MsgWrap, [WeChatPriUtil setRPS:arg2 type:rpsResult]);
+        } else {
+            CHSuper2(CMessageMgr, AddEmoticonMsg, arg1, MsgWrap, arg2);
+        }
+    } else {
+        CHSuper2(CMessageMgr, AddEmoticonMsg, arg1, MsgWrap, arg2);
+    }
+}
+
+CHDeclareClass(GameController)
+CHOptimizedMethod1(self, void, GameController, getMD5ByGameContent, unsigned int, arg1) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger diceNumber = [userDefaults integerForKey:@"WeChatTweakCustomDiceNumberKey"];
+    NSInteger rpsResult = [userDefaults integerForKey:@"WeChatTweakCustomRPSResultKey"];
+    if (arg1 > 3 && arg1 < 10) {
+        if (diceNumber) {
+            return CHSuper1(GameController,getMD5ByGameContent,diceNumber + 3);
+        } else {
+            return CHSuper1(GameController,getMD5ByGameContent,arg1);
+        }
+    } else if (arg1 > 0 && arg1 < 4) {
+        if (rpsResult) {
+            return CHSuper1(GameController,getMD5ByGameContent,rpsResult);
+        } else {
+            return CHSuper1(GameController,getMD5ByGameContent,arg1);
+        }
+    } else {
+        return CHSuper1(GameController,getMD5ByGameContent,arg1);
+    }
+}
+
+CHDeclareClass(CEmoticonUploadMgr)
+CHOptimizedMethod1(self, void, CEmoticonUploadMgr, StartUpload, id, arg1) {
+    CMessageWrap *wrap = (CMessageWrap *)arg1;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger diceNumber = [userDefaults integerForKey:@"WeChatTweakCustomDiceNumberKey"];
+    NSInteger rpsResult = [userDefaults integerForKey:@"WeChatTweakCustomRPSResultKey"];
+    if (wrap.m_uiGameType == 2) {
+        if (diceNumber) {
+            CHSuper1(CEmoticonUploadMgr,StartUpload,[WeChatPriUtil setDice:arg1 point:diceNumber]);
+        } else {
+            CHSuper1(CEmoticonUploadMgr,StartUpload,arg1);
+        }
+    } else if (wrap.m_uiGameType == 1) {
+        if (rpsResult) {
+            CHSuper1(CEmoticonUploadMgr,StartUpload,[WeChatPriUtil setRPS:arg1 type:rpsResult]);
+        } else {
+            CHSuper1(CEmoticonUploadMgr,StartUpload,arg1);
+        }
+    } else {
+        CHSuper1(CEmoticonUploadMgr,StartUpload,arg1);
+    }
+}
+
 // MARK: 朋友圈
 //CHDeclareClass(WCOperateFloatView)
 //CHOptimizedMethod1(self, void, WCOperateFloatView, onLikeItem, id, arg1) {
@@ -1077,5 +1145,13 @@ CHConstructor{
     CHHook3(CMessageMgr, MessageReturn, MessageInfo, Event);
     CHHook3(CMessageMgr, GetHelloUsers, Limit, OnlyUnread);
     
+    
+    // 自定义游戏
+    CHLoadLateClass(GameController);
+    CHHook1(GameController, getMD5ByGameContent);
+    CHHook2(CMessageMgr, AddEmoticonMsg, MsgWrap);
+    
+    CHLoadLateClass(CEmoticonUploadMgr);
+    CHHook1(CEmoticonUploadMgr, StartUpload);
 }
 

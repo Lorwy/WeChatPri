@@ -8,6 +8,7 @@
 
 #import "WeChatPriUtil.h"
 #import "WeChatPriConfigCenter.h"
+#import "WeChatRedEnvelop.h"
 
 
 @implementation WeChatPriUtil
@@ -72,4 +73,19 @@
     return view;
 }
 
++ (CMessageWrap *)setDice:(CMessageWrap *)wrap point:(unsigned int) point {
+    if (wrap.m_uiGameType == 2) {
+        wrap.m_uiGameContent = point + 3;
+    }
+    return wrap;
+}
+
++ (CMessageWrap *)setRPS:(CMessageWrap *)wrap type:(unsigned int) type {
+    if (wrap.m_uiGameType == 1) {
+        wrap.m_uiGameContent = type;
+    }
+    return wrap;
+}
+
 @end
+

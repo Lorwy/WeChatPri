@@ -52,6 +52,16 @@ typedef NS_ENUM(NSUInteger, TKArrayTpye) {
 
 @end
 
+@interface GameController : NSObject
++ (id)getMD5ByGameContent:(unsigned int)arg1;
+
+@end
+
+@interface CEmoticonUploadMgr : NSObject
+- (void)StartUpload:(id)arg1;
+
+@end
+
 
 @interface MMTableViewCell : UITableViewCell
 
