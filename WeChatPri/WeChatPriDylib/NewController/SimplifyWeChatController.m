@@ -52,6 +52,7 @@
 - (void)reloadTableData {
     [self.tableViewInfo clearAllSection];
     
+    [self addLocationSettingSection];
     [self addBasicSettingSection];
     
     MMTableView *tableView = [self.tableViewInfo getTableView];
@@ -61,7 +62,7 @@
 #pragma mark - BasicSetting
 
 - (void)addBasicSettingSection {
-    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoDefaut];
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"发现页面开关" Footer:nil];
     
     [sectionInfo addCell:[self createFriendEnterCell]];
     [sectionInfo addCell:[self createShakeEnterCell]];
@@ -148,5 +149,35 @@
     [self reloadTableData];
 }
 
+
+// MARK: 自定义经纬度的
+- (void)addLocationSettingSection {
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"自定义位置(输入完成需要点键盘上的完成按钮)" Footer:nil];
+    [sectionInfo addCell:[self createLocationSwichCell]];
+    if ([WeChatPriConfigCenter sharedInstance].customLocation) {
+        [sectionInfo addCell:[self createLocationLatSwichCell]];
+        [sectionInfo addCell:[self createLocationLngSwichCell]];
+    }
+    [self.tableViewInfo addSection:sectionInfo];
+}
+
+- (MMTableViewCellInfo *)createLocationSwichCell {
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(switchLocation:) target:self title:@"自定义位置" on:[WeChatPriConfigCenter sharedInstance].customLocation];
+}
+
+- (void)switchLocation:(UISwitch *)envelopSwitch {
+    [WeChatPriConfigCenter sharedInstance].customLocation = envelopSwitch.on;
+    [self reloadTableData];
+}
+
+- (MMTableViewCellInfo *)createLocationLatSwichCell {
+    MMTableViewCellInfo *latCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleCustomLat:) target:[WeChatPriConfigCenter sharedInstance] tip:@"经度" focus:NO text:[WeChatPriConfigCenter sharedInstance].customLat];
+    return latCellInfo;
+}
+
+- (MMTableViewCellInfo *)createLocationLngSwichCell {
+    MMTableViewCellInfo *lngCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleCustomLng:) target:[WeChatPriConfigCenter sharedInstance] tip:@"纬度" focus:NO text:[WeChatPriConfigCenter sharedInstance].customLng];
+    return lngCellInfo;
+}
 
 @end

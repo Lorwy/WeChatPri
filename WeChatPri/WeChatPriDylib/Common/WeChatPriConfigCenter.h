@@ -24,6 +24,10 @@
 @property (nonatomic, retain) NSMutableDictionary<NSString *,NSNumber *> *chatIgnoreInfo;
 //@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
 @property (nonatomic, copy) NSString *currentUserName;
+@property (nonatomic, assign) BOOL customLocation;
+
+@property (nonatomic, copy) NSString* customLat;
+@property (nonatomic, copy) NSString* customLng;
 
 @property (nonatomic, assign) BOOL friendEnter;
 @property (nonatomic, assign) BOOL shakeEnter;
@@ -42,5 +46,9 @@
 - (void)handleShowMsgInWebPage:(UISwitch *)sender;
 - (void)handleStepCount:(UITextField *)sender;
 - (void)handleIgnoreChatRoom:(UISwitch *)sender;
+
+
+- (void)handleCustomLat:(UITextField *)sender;
+- (void)handleCustomLng:(UITextField *)sender;
 
 @end

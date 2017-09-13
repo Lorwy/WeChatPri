@@ -49,6 +49,9 @@ LSERIALIZE_CODER_DECODER()
     center.shopEnter = instance.shopEnter;
     center.gameEnter = instance.gameEnter;
     center.appletEnter = instance.appletEnter;
+    center.customLocation = instance.customLocation;
+    center.customLat = instance.customLat;
+    center.customLng = instance.customLng;
 }
 
 #pragma mark - Handle Events
@@ -76,6 +79,14 @@ LSERIALIZE_CODER_DECODER()
 - (void)handleIgnoreChatRoom:(UISwitch *)sender
 {
     self.chatIgnoreInfo[self.currentUserName] = @(sender.isOn);
+}
+
+- (void)handleCustomLat:(UITextField *)sender {
+    self.customLat = sender.text;
+}
+
+- (void)handleCustomLng:(UITextField *)sender {
+    self.customLng = sender.text;
 }
 
 - (UIViewController *)viewControllerOfResponder:(UIResponder *)responder

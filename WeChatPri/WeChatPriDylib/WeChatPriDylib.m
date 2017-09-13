@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <Cycript/Cycript.h>
 #import <CydiaSubstrate/CydiaSubstrate.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "WeChatPriConfigCenter.h"
 #import "WeChatPri.h"
@@ -32,6 +33,7 @@
 
 #import "TKRobotConfig.h"
 #import "TKSettingViewController.h"
+
 
 #define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
 
@@ -1030,6 +1032,34 @@ CHOptimizedMethod1(self, void, CEmoticonUploadMgr, StartUpload, id, arg1) {
     }
 }
 
+CHDeclareClass(CLLocationManager)
+CHOptimizedMethod0(self, void, CLLocationManager, startUpdatingLocation) {
+    if([WeChatPriConfigCenter sharedInstance].customLocation &&
+       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLat) &&
+       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLng))
+    {
+        CGFloat lat = [[WeChatPriConfigCenter sharedInstance].customLat doubleValue];
+        CGFloat lng = [[WeChatPriConfigCenter sharedInstance].customLng doubleValue];
+        if (lat < 0.1 || lng < 0.1) {
+            lat = 35.707013;
+            lng = 139.730562;
+        }
+        
+        CLLocation *tokyoLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        
+        CLLocation *cantonLocation = [[CLLocation alloc] initWithLatitude:23.127444 longitude:113.257217];
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.delegate locationManager:self didUpdateToLocation:tokyoLocation fromLocation:cantonLocation];
+        });
+#pragma clang diagnostic pop
+    } else {
+        CHSuper0(CLLocationManager,startUpdatingLocation);
+    }
+}
+
 // MARK: 朋友圈
 //CHDeclareClass(WCOperateFloatView)
 //CHOptimizedMethod1(self, void, WCOperateFloatView, onLikeItem, id, arg1) {
@@ -1153,5 +1183,8 @@ CHConstructor{
     
     CHLoadLateClass(CEmoticonUploadMgr);
     CHHook1(CEmoticonUploadMgr, StartUpload);
+    
+    CHLoadLateClass(CLLocationManager);
+    CHHook0(CLLocationManager, startUpdatingLocation);
 }
 
