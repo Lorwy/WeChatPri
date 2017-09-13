@@ -403,7 +403,7 @@ CHDeclareMethod1(void, BaseMsgContentViewController, viewWillAppear, BOOL, anima
     CHSuper1(BaseMsgContentViewController, viewWillAppear, animated);
     
     UIButton *btn = [self.view viewWithTag:8899];
-    if ([WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage && [WeChatNewsMsgManager sharedInstance].webViewViewControllers) {
+    if ([WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage && VALID_ARRAY([WeChatNewsMsgManager sharedInstance].webViewViewControllers)) {
         if (!btn) {
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80, 74, 80, 40)];
             [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -424,7 +424,7 @@ CHDeclareMethod1(void, BaseMsgContentViewController, viewWillAppear, BOOL, anima
 CHDeclareMethod0(void, BaseMsgContentViewController, backToWebViewController) {
     // 从聊天界面到网页
     NSArray *webViewViewControllers = [WeChatNewsMsgManager sharedInstance].webViewViewControllers;
-    if (webViewViewControllers) {
+    if (VALID_ARRAY(webViewViewControllers)) {
         [[objc_getClass("CAppViewControllerManager") getCurrentNavigationController] setViewControllers:webViewViewControllers animated:YES];
     }
 }

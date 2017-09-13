@@ -20,6 +20,11 @@ alpha:1.0]
 #define nightTextColor UIColorFromRGB(0xffffff)
 #define nightTabBarColor UIColorFromRGB(0x444444)
 
+
+#define VALID_STRING(string) ((string) && ([(string) isKindOfClass:[NSString class]]) && ([(string) length] > 0))
+#define VALID_ARRAY(array) ((array) && ([(array) isKindOfClass:[NSArray class]]) && ([(array) count] > 0))
+#define VALID_DICTIONARY(dictionary) ((dictionary) && ([(dictionary) isKindOfClass:[NSDictionary class]]) && ([(dictionary) count] > 0))
+
 // Notif
 #define KweChatNewMessageNotification @"KweChatNewMessageNotification"
 
