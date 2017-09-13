@@ -30,6 +30,9 @@
 
 #import "WeChatNewsMsgManager.h"
 
+#import "TKRobotConfig.h"
+#import "TKSettingViewController.h"
+
 #define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
 
 // 发现页面
@@ -196,6 +199,9 @@ CHDeclareMethod0(void, NewSettingViewController, reloadTableData)
     MMTableViewCellInfo *simplifySettingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(simplifySetting) target:self title:@"功能开关" accessoryType:1];
     [sectionInfo addCell:simplifySettingCell];
     
+    MMTableViewCellInfo *groupSettingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(groupSetting) target:self title:@"群助手" accessoryType:1];
+    [sectionInfo addCell:groupSettingCell];
+    
     [tableInfo insertSection:sectionInfo At:0];
     
     
@@ -210,6 +216,11 @@ CHDeclareMethod0(void, NewSettingViewController, setting) {
 
 CHDeclareMethod0(void, NewSettingViewController, simplifySetting) {
     SimplifyWeChatController *settingViewController = [SimplifyWeChatController new];
+    [self.navigationController PushViewController:settingViewController animated:YES];
+}
+
+CHDeclareMethod0(void, NewSettingViewController, groupSetting) {
+    TKSettingViewController *settingViewController = [TKSettingViewController new];
     [self.navigationController PushViewController:settingViewController animated:YES];
 }
 
@@ -705,6 +716,203 @@ CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString *, msg, MsgW
     
 }
 
+//MARK: 自动添加人
+CHOptimizedMethod3(self, void, CMessageMgr, MessageReturn, unsigned int, arg1, MessageInfo, NSDictionary *, info, Event, unsigned int, arg3){
+    CHSuper3(CMessageMgr, MessageReturn, arg1, MessageInfo, info, Event, arg3);
+    CMessageWrap *wrap = [info objectForKey:@"18"];
+    
+    if (arg1 == 227) {
+        NSDate *now = [NSDate date];
+        NSTimeInterval nowSecond = now.timeIntervalSince1970;
+        if (nowSecond - wrap.m_uiCreateTime > 60) {      // 若是1分钟前的消息，则不进行处理。
+            return;
+        }
+        CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+        CContact *contact = [contactMgr getContactByName:wrap.m_nsFromUsr];
+        if(wrap.m_uiMessageType == 1) {                                         // 收到文本消息
+            if (![contact isChatroom]) {                                        // 是否为群聊
+                [self performSelector:@selector(autoReplyWithMessageWrap:)
+                           withObject:wrap];                                    // 自动回复个人消息
+            } else {
+                [self performSelector:@selector(removeMemberWithMessageWrap:)
+                           withObject:wrap];                                    // 自动踢人
+                [self performSelector:@selector(autoReplyChatRoomWithMessageWrap:)
+                           withObject:wrap];                                // 自动回复群消息
+            }
+        } else if(wrap.m_uiMessageType == 10000) {                              // 收到群通知，eg:群邀请了好友；删除了好友。
+            CContact *selfContact = [contactMgr getSelfContact];
+            if([selfContact.m_nsUsrName isEqualToString:contact.m_nsOwner]) {   // 只有自己创建的群，才发送群欢迎语
+                [self performSelector:@selector(welcomeJoinChatRoomWithMessageWrap:) withObject:wrap];
+            }
+        }
+    }
+    
+    if (arg1 == 332) {                                                          // 收到添加好友消息
+        [self performSelector:@selector(addAutoVerifyWithMessageInfo:) withObject:info];
+    }
+}
+
+CHOptimizedMethod3(self, id, CMessageMgr, GetHelloUsers, id, arg1, Limit, unsigned int, arg2, OnlyUnread, _Bool, arg3){
+    id userNameArray = CHSuper3(CMessageMgr, GetHelloUsers, arg1, Limit, arg2, OnlyUnread, arg3);;
+    if ([arg1 isEqualToString:@"fmessage"] && arg2 == 0 && arg3 == 0) {
+        [self performSelector:@selector(addAutoVerifyWithArray:arrayType:) withObject:userNameArray withObject:@(TKArrayTpyeMsgUserName)];
+    }
+    
+    return userNameArray;
+}
+
+// MARK: 给CMessageMgr新增方法
+CHDeclareMethod1(void, CMessageMgr, autoReplyWithMessageWrap, CMessageWrap *, wrap) {
+    BOOL autoReplyEnable = [[TKRobotConfig sharedConfig] autoReplyEnable];
+    NSString *autoReplyContent = [[TKRobotConfig sharedConfig] autoReplyText];
+    if (!autoReplyEnable || autoReplyContent == nil || [autoReplyContent isEqualToString:@""]) {                                                     // 是否开启自动回复
+        return;
+    }
+    
+    NSString * content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
+    NSString *needAutoReplyMsg = [[TKRobotConfig sharedConfig] autoReplyKeyword];
+    NSArray * keyWordArray = [needAutoReplyMsg componentsSeparatedByString:@"||"];
+    [keyWordArray enumerateObjectsUsingBlock:^(NSString *keyword, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([keyword isEqualToString:@"*"] || [content isEqualToString:keyword]) {
+            [self performSelector:@selector(sendMsg:toContactUsrName:) withObject:autoReplyContent withObject:wrap.m_nsFromUsr];
+        }
+    }];
+}
+
+CHDeclareMethod1(void, CMessageMgr, removeMemberWithMessageWrap, CMessageWrap *, wrap) {
+    BOOL chatRoomSensitiveEnable = [[TKRobotConfig sharedConfig] chatRoomSensitiveEnable];
+    if (!chatRoomSensitiveEnable) {
+        return;
+    }
+    
+    CGroupMgr *groupMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CGroupMgr")];
+    NSString *content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
+    NSMutableArray *array = [[TKRobotConfig sharedConfig] chatRoomSensitiveArray];
+    [array enumerateObjectsUsingBlock:^(NSString *text, NSUInteger idx, BOOL * _Nonnull stop) {
+        if([content isEqualToString:text]) {
+            [groupMgr DeleteGroupMember:wrap.m_nsFromUsr withMemberList:@[wrap.m_nsRealChatUsr] scene:3074516140857229312];
+        }
+    }];
+}
+
+CHDeclareMethod1(void, CMessageMgr, autoReplyChatRoomWithMessageWrap, CMessageWrap *, wrap) {
+    BOOL autoReplyChatRoomEnable = [[TKRobotConfig sharedConfig] autoReplyChatRoomEnable];
+    NSString *autoReplyChatRoomContent = [[TKRobotConfig sharedConfig] autoReplyChatRoomText];
+    if (!autoReplyChatRoomEnable || autoReplyChatRoomContent == nil || [autoReplyChatRoomContent isEqualToString:@""]) {                                                     // 是否开启自动回复
+        return;
+    }
+    
+    NSString * content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
+    NSString *needAutoReplyChatRoomMsg = [[TKRobotConfig sharedConfig] autoReplyChatRoomKeyword];
+    NSArray * keyWordArray = [needAutoReplyChatRoomMsg componentsSeparatedByString:@"||"];
+    [keyWordArray enumerateObjectsUsingBlock:^(NSString *keyword, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([keyword isEqualToString:@"*"] || [content isEqualToString:keyword]) {
+            [self performSelector:@selector(sendMsg:toContactUsrName:) withObject:autoReplyChatRoomContent withObject:wrap.m_nsFromUsr];
+        }
+    }];
+}
+
+CHDeclareMethod1(void, CMessageMgr, welcomeJoinChatRoomWithMessageWrap, CMessageWrap *, wrap){
+    BOOL welcomeJoinChatRoomEnable = [[TKRobotConfig sharedConfig] welcomeJoinChatRoomEnable];
+    if (!welcomeJoinChatRoomEnable) return;                                     // 是否开启入群欢迎语
+    
+    
+    
+    
+    NSString * content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
+    NSRange rangeFrom = [content rangeOfString:@"邀请\""];
+    NSRange rangeTo = [content rangeOfString:@"\"加入了群聊"];
+    NSRange nameRange;
+    if (rangeFrom.length > 0 && rangeTo.length > 0) {                           // 通过别人邀请进群
+        NSInteger nameLocation = rangeFrom.location + rangeFrom.length;
+        nameRange = NSMakeRange(nameLocation, rangeTo.location - nameLocation);
+    } else {
+        NSRange range = [content rangeOfString:@"\"通过扫描\""];
+        if (range.length > 0) {                                                 // 通过二维码扫描进群
+            nameRange = NSMakeRange(2, range.location - 2);
+        } else {
+            return;
+        }
+    }
+    
+    NSString *welcomeJoinChatRoomText = [[TKRobotConfig sharedConfig] welcomeJoinChatRoomText];
+    [self performSelector:@selector(sendMsg:toContactUsrName:) withObject:welcomeJoinChatRoomText withObject:wrap.m_nsFromUsr];
+}
+
+CHDeclareMethod1(void, CMessageMgr, addAutoVerifyWithMessageInfo, NSDictionary *, info){
+    BOOL autoVerifyEnable = [[TKRobotConfig sharedConfig] autoVerifyEnable];
+    
+    if (!autoVerifyEnable)
+        return;
+    
+    NSString *keyStr = [info objectForKey:@"5"];
+    if ([keyStr isEqualToString:@"fmessage"]) {
+        NSArray *wrapArray = [info objectForKey:@"27"];
+        [self performSelector:@selector(addAutoVerifyWithArray:arrayType:) withObject:wrapArray withObject:@(TKArrayTpyeMsgWrap)];
+    }
+}
+// 自动通过好友请求
+CHDeclareMethod2(void, CMessageMgr, addAutoVerifyWithArray, NSArray *, ary, arrayType, NSNumber *, type) {
+    NSMutableArray *arrHellos = [NSMutableArray array];
+    [ary enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (type.integerValue == TKArrayTpyeMsgWrap) {
+            CPushContact *contact = [NSClassFromString(@"SayHelloDataLogic") getContactFrom:obj];
+            [arrHellos addObject:contact];
+        } else if (type.integerValue == TKArrayTpyeMsgUserName) {
+            FriendAsistSessionMgr *asistSessionMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("FriendAsistSessionMgr") class]];
+            CMessageWrap *wrap = [asistSessionMgr GetLastMessage:@"fmessage" HelloUser:obj OnlyTo:NO];
+            CPushContact *contact = [NSClassFromString(@"SayHelloDataLogic") getContactFrom:wrap];
+            [arrHellos addObject:contact];
+        }
+    }];
+    
+    NSString *autoVerifyKeyword = [[TKRobotConfig sharedConfig] autoVerifyKeyword];
+    for (int idx = 0;idx < arrHellos.count;idx++) {
+        CPushContact *contact = arrHellos[idx];
+        if (![contact isMyContact] && [contact.m_nsDes isEqualToString:autoVerifyKeyword]) {
+            CContactVerifyLogic *verifyLogic = [[NSClassFromString(@"CContactVerifyLogic") alloc] init];
+            CVerifyContactWrap *wrap = [[NSClassFromString(@"CVerifyContactWrap") alloc] init];
+            [wrap setM_nsUsrName:contact.m_nsEncodeUserName];
+            [wrap setM_uiScene:contact.m_uiFriendScene];
+            [wrap setM_nsTicket:contact.m_nsTicket];
+            [wrap setM_nsChatRoomUserName:contact.m_nsChatRoomUserName];
+            wrap.m_oVerifyContact = contact;
+            
+            AutoSetRemarkMgr *mgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("AutoSetRemarkMgr") class]];
+            id attr = [mgr GetStrangerAttribute:contact AttributeName:1001];
+            
+            if([attr boolValue]) {
+                [wrap setM_uiWCFlag:(wrap.m_uiWCFlag | 1)];
+            }
+            [verifyLogic startWithVerifyContactWrap:[NSArray arrayWithObject:wrap] opCode:3 parentView:[UIView new] fromChatRoom:NO];
+            
+            // 发送欢迎语
+            BOOL autoWelcomeEnable = [[TKRobotConfig sharedConfig] autoWelcomeEnable];
+            NSString *autoWelcomeText = [[TKRobotConfig sharedConfig] autoWelcomeText];
+            if (autoWelcomeEnable && autoWelcomeText != nil) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self performSelector:@selector(sendMsg:toContactUsrName:) withObject:autoWelcomeText withObject:contact.m_nsUsrName];
+                });
+            }
+        }
+    }
+}
+
+// 发送消息
+CHDeclareMethod2(void, CMessageMgr, sendMsg, NSString *, msg, toContactUsrName, NSString *, userName) {
+    CMessageWrap *wrap = [[NSClassFromString(@"CMessageWrap") alloc] initWithMsgType:1];
+    id usrName = [NSClassFromString(@"SettingUtil") getLocalUsrName:0];
+    [wrap setM_nsFromUsr:usrName];
+    [wrap setM_nsContent:msg];
+    [wrap setM_nsToUsr:userName];
+    MMNewSessionMgr *sessionMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("MMNewSessionMgr") class]];
+    [wrap setM_uiCreateTime:[sessionMgr GenSendMsgTime]];
+    [wrap setM_uiStatus:YES];
+    
+    CMessageMgr *chatMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CMessageMgr") class]];
+    [chatMgr AddMsg:userName MsgWrap:wrap];
+}
+
 //MARK: 阻止撤回消息
 CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, CMessageWrap *, arg1)
 {
@@ -864,6 +1072,10 @@ CHConstructor{
 //    CHHook1(WCLikeButton, initWithDataItem);
 //    CHHook0(WCLikeButton, onLikeFriend);
 
+    
+    // 自动添加好友
+    CHHook3(CMessageMgr, MessageReturn, MessageInfo, Event);
+    CHHook3(CMessageMgr, GetHelloUsers, Limit, OnlyUnread);
     
 }
 

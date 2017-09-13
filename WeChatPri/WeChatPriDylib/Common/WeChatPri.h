@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WeChatRedEnvelop.h"
+
+
+typedef NS_ENUM(NSUInteger, TKArrayTpye) {
+    TKArrayTpyeMsgWrap,
+    TKArrayTpyeMsgUserName
+};
 
 #pragma mark - Controller
 

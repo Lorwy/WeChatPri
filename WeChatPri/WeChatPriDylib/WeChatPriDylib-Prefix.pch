@@ -1,4 +1,8 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import "WeChatPriGloabDefine.h"
+    #import "WeChatPri.h"
+    #import "WeChatRedEnvelop.h"
+    #import "TKToast.h"
+    #import "TKEditViewController.h"
 #endif

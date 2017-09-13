@@ -9,6 +9,7 @@
 #import "WBMultiSelectGroupsViewController.h"
 #import "WeChatRedEnvelop.h"
 #import <objc/objc-runtime.h>
+#import "WeChatPri.h"
 
 @interface WBMultiSelectGroupsViewController () <ContactSelectViewDelegate>
 

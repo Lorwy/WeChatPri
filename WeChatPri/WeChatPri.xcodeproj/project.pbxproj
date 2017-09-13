@@ -17,6 +17,19 @@
 		0426E1A71F68C34500449CF4 /* WeChatPriUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E19C1F68C34500449CF4 /* WeChatPriUtil.m */; };
 		0426E1A81F68C34500449CF4 /* SimplifyWeChatController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E19E1F68C34500449CF4 /* SimplifyWeChatController.h */; };
 		0426E1A91F68C34500449CF4 /* SimplifyWeChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E19F1F68C34500449CF4 /* SimplifyWeChatController.m */; };
+		0426E1B21F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1AC1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h */; };
+		0426E1B31F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1AD1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m */; };
+		0426E1B41F68C98E00449CF4 /* TKEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1AE1F68C98E00449CF4 /* TKEditViewController.h */; };
+		0426E1B51F68C98E00449CF4 /* TKEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1AF1F68C98E00449CF4 /* TKEditViewController.m */; };
+		0426E1B61F68C98E00449CF4 /* TKMultiSelectContactsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1B01F68C98E00449CF4 /* TKMultiSelectContactsViewController.h */; };
+		0426E1B71F68C98E00449CF4 /* TKMultiSelectContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1B11F68C98E00449CF4 /* TKMultiSelectContactsViewController.m */; };
+		0426E1BA1F68C99800449CF4 /* TKRobotConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1B81F68C99800449CF4 /* TKRobotConfig.h */; };
+		0426E1BB1F68C99800449CF4 /* TKRobotConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1B91F68C99800449CF4 /* TKRobotConfig.m */; };
+		0426E1BE1F68C99F00449CF4 /* TKSettingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1BC1F68C99F00449CF4 /* TKSettingViewController.h */; };
+		0426E1BF1F68C99F00449CF4 /* TKSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1BD1F68C99F00449CF4 /* TKSettingViewController.m */; };
+		0426E1C21F68C9AB00449CF4 /* TKToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426E1C01F68C9AB00449CF4 /* TKToast.h */; };
+		0426E1C31F68C9AB00449CF4 /* TKToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 0426E1C11F68C9AB00449CF4 /* TKToast.m */; };
+		0426E1CC1F68E7B600449CF4 /* robot.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0426E1AA1F68C96D00449CF4 /* robot.dylib */; };
 		0434C0F31F380C1200B49000 /* WBBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434C0E21F380C1200B49000 /* WBBaseViewController.h */; };
 		0434C0F41F380C1200B49000 /* WBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434C0E31F380C1200B49000 /* WBBaseViewController.m */; };
 		0434C0F51F380C1200B49000 /* WBMultiSelectGroupsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434C0E41F380C1200B49000 /* WBMultiSelectGroupsViewController.h */; };
@@ -76,6 +89,19 @@
 		0426E19C1F68C34500449CF4 /* WeChatPriUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPriUtil.m; sourceTree = "<group>"; };
 		0426E19E1F68C34500449CF4 /* SimplifyWeChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplifyWeChatController.h; sourceTree = "<group>"; };
 		0426E19F1F68C34500449CF4 /* SimplifyWeChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplifyWeChatController.m; sourceTree = "<group>"; };
+		0426E1AA1F68C96D00449CF4 /* robot.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = robot.dylib; sourceTree = "<group>"; };
+		0426E1AC1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKChatRoomSensitiveViewController.h; sourceTree = "<group>"; };
+		0426E1AD1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKChatRoomSensitiveViewController.m; sourceTree = "<group>"; };
+		0426E1AE1F68C98E00449CF4 /* TKEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKEditViewController.h; sourceTree = "<group>"; };
+		0426E1AF1F68C98E00449CF4 /* TKEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKEditViewController.m; sourceTree = "<group>"; };
+		0426E1B01F68C98E00449CF4 /* TKMultiSelectContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMultiSelectContactsViewController.h; sourceTree = "<group>"; };
+		0426E1B11F68C98E00449CF4 /* TKMultiSelectContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKMultiSelectContactsViewController.m; sourceTree = "<group>"; };
+		0426E1B81F68C99800449CF4 /* TKRobotConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRobotConfig.h; sourceTree = "<group>"; };
+		0426E1B91F68C99800449CF4 /* TKRobotConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRobotConfig.m; sourceTree = "<group>"; };
+		0426E1BC1F68C99F00449CF4 /* TKSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSettingViewController.h; sourceTree = "<group>"; };
+		0426E1BD1F68C99F00449CF4 /* TKSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSettingViewController.m; sourceTree = "<group>"; };
+		0426E1C01F68C9AB00449CF4 /* TKToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKToast.h; sourceTree = "<group>"; };
+		0426E1C11F68C9AB00449CF4 /* TKToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKToast.m; sourceTree = "<group>"; };
 		0434C0E21F380C1200B49000 /* WBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBBaseViewController.h; sourceTree = "<group>"; };
 		0434C0E31F380C1200B49000 /* WBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBBaseViewController.m; sourceTree = "<group>"; };
 		0434C0E41F380C1200B49000 /* WBMultiSelectGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBMultiSelectGroupsViewController.h; sourceTree = "<group>"; };
@@ -122,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0426E1CC1F68E7B600449CF4 /* robot.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +179,10 @@
 				0426E19A1F68C34500449CF4 /* WeChatPriGloabDefine.h */,
 				0426E19B1F68C34500449CF4 /* WeChatPriUtil.h */,
 				0426E19C1F68C34500449CF4 /* WeChatPriUtil.m */,
+				0426E1B81F68C99800449CF4 /* TKRobotConfig.h */,
+				0426E1B91F68C99800449CF4 /* TKRobotConfig.m */,
+				0426E1C01F68C9AB00449CF4 /* TKToast.h */,
+				0426E1C11F68C9AB00449CF4 /* TKToast.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -161,6 +192,14 @@
 			children = (
 				0426E19E1F68C34500449CF4 /* SimplifyWeChatController.h */,
 				0426E19F1F68C34500449CF4 /* SimplifyWeChatController.m */,
+				0426E1AC1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h */,
+				0426E1AD1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m */,
+				0426E1AE1F68C98E00449CF4 /* TKEditViewController.h */,
+				0426E1AF1F68C98E00449CF4 /* TKEditViewController.m */,
+				0426E1B01F68C98E00449CF4 /* TKMultiSelectContactsViewController.h */,
+				0426E1B11F68C98E00449CF4 /* TKMultiSelectContactsViewController.m */,
+				0426E1BC1F68C99F00449CF4 /* TKSettingViewController.h */,
+				0426E1BD1F68C99F00449CF4 /* TKSettingViewController.m */,
 			);
 			path = NewController;
 			sourceTree = "<group>";
@@ -228,6 +267,7 @@
 		04847F2F1F3409420050C32F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0426E1AA1F68C96D00449CF4 /* robot.dylib */,
 				04A613AA1F53B46700206D63 /* CoreGraphics.framework */,
 				04847F301F3409420050C32F /* Cycript.framework */,
 				04847F321F3409420050C32F /* JavaScriptCore.framework */,
@@ -320,6 +360,7 @@
 				0426E1A61F68C34500449CF4 /* WeChatPriUtil.h in Headers */,
 				0426E1A51F68C34500449CF4 /* WeChatPriGloabDefine.h in Headers */,
 				0426E1A81F68C34500449CF4 /* SimplifyWeChatController.h in Headers */,
+				0426E1B41F68C98E00449CF4 /* TKEditViewController.h in Headers */,
 				0434C0F51F380C1200B49000 /* WBMultiSelectGroupsViewController.h in Headers */,
 				0434C0F71F380C1200B49000 /* WBReceiveRedEnvelopOperation.h in Headers */,
 				0434C0F91F380C1200B49000 /* WBRedEnvelopConfig.h in Headers */,
@@ -329,13 +370,18 @@
 				0434C0F31F380C1200B49000 /* WBBaseViewController.h in Headers */,
 				0426E1A01F68C34500449CF4 /* WeChatNewsMsgManager.h in Headers */,
 				0434C1011F380C1200B49000 /* WeChatRedEnvelop.h in Headers */,
+				0426E1B21F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h in Headers */,
 				04847F4E1F3409420050C32F /* WeChatPriDylib.h in Headers */,
 				04847F3D1F3409420050C32F /* JRSwizzle.h in Headers */,
+				0426E1BA1F68C99800449CF4 /* TKRobotConfig.h in Headers */,
 				04847F4C1F3409420050C32F /* fishhook.h in Headers */,
+				0426E1B61F68C98E00449CF4 /* TKMultiSelectContactsViewController.h in Headers */,
 				0434C0FF1F380C1200B49000 /* WBSettingViewController.h in Headers */,
+				0426E1C21F68C9AB00449CF4 /* TKToast.h in Headers */,
 				0434C0FB1F380C1200B49000 /* WBRedEnvelopParamQueue.h in Headers */,
 				0434C0FD1F380C1200B49000 /* WBRedEnvelopTaskManager.h in Headers */,
 				04A613CC1F5412E100206D63 /* UILabel+AutoResize.h in Headers */,
+				0426E1BE1F68C99F00449CF4 /* TKSettingViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0426E1C31F68C9AB00449CF4 /* TKToast.m in Sources */,
 				04847F3F1F3409420050C32F /* JRSwizzle.m in Sources */,
 				0426E1A41F68C34500449CF4 /* WeChatPriConfigCenter.m in Sources */,
 				0434C0F61F380C1200B49000 /* WBMultiSelectGroupsViewController.m in Sources */,
@@ -473,14 +520,19 @@
 				04847F501F3409420050C32F /* WeChatPriDylib.m in Sources */,
 				0434C0FC1F380C1200B49000 /* WBRedEnvelopParamQueue.m in Sources */,
 				04847F471F3409420050C32F /* AntiAntiDebug.m in Sources */,
+				0426E1B71F68C98E00449CF4 /* TKMultiSelectContactsViewController.m in Sources */,
 				04A613CD1F5412E100206D63 /* UILabel+AutoResize.m in Sources */,
+				0426E1B31F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m in Sources */,
 				0434C1031F380C1200B49000 /* WeChatRedEnvelopParam.m in Sources */,
 				0434C0F81F380C1200B49000 /* WBReceiveRedEnvelopOperation.m in Sources */,
 				0434C0FA1F380C1200B49000 /* WBRedEnvelopConfig.m in Sources */,
 				0434C0F41F380C1200B49000 /* WBBaseViewController.m in Sources */,
 				0426E1A11F68C34500449CF4 /* WeChatNewsMsgManager.m in Sources */,
 				0426E1A91F68C34500449CF4 /* SimplifyWeChatController.m in Sources */,
+				0426E1B51F68C98E00449CF4 /* TKEditViewController.m in Sources */,
+				0426E1BB1F68C99800449CF4 /* TKRobotConfig.m in Sources */,
 				0434C0FE1F380C1200B49000 /* WBRedEnvelopTaskManager.m in Sources */,
+				0426E1BF1F68C99F00449CF4 /* TKSettingViewController.m in Sources */,
 				0426E1A71F68C34500449CF4 /* WeChatPriUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +644,10 @@
 				DEVELOPMENT_TEAM = 6RE55TZ3K4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChatPri/Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_ROOT = "${SRCROOT}/Pods";
@@ -606,6 +662,10 @@
 				DEVELOPMENT_TEAM = 6RE55TZ3K4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChatPri/Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MONKEYDEV_CLASS_DUMP = NO;
 				MONKEYDEV_RESTORE_SYMBOL = NO;
 				PODS_ROOT = "${SRCROOT}/Pods";
@@ -639,11 +699,13 @@
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /usr/lib;
+				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(MonkeyDevPath)/Frameworks",
 					"$(MonkeyDevTheosPath)/vendor/lib/**",
+					"$(PROJECT_DIR)",
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
@@ -689,11 +751,13 @@
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /usr/lib;
+				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(MonkeyDevPath)/Frameworks",
 					"$(MonkeyDevTheosPath)/vendor/lib/**",
+					"$(PROJECT_DIR)",
 				);
 				MonkeyDevPath = /opt/MonkeyDev;
 				MonkeyDevTheosPath = /opt/theos;
