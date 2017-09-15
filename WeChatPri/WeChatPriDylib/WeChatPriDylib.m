@@ -182,20 +182,8 @@ CHDeclareMethod0(void, NewSettingViewController, reloadTableData)
     CHSuper0(NewSettingViewController, reloadTableData);
     MMTableViewInfo *tableInfo = [self valueForKeyPath:@"m_tableViewInfo"];
     MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoDefaut];
-    // 加一个开启夜间模式的cell
-    MMTableViewCellInfo *nightCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleNightMode:) target:[WeChatPriConfigCenter sharedInstance] title:@"夜间模式" on:[WeChatPriConfigCenter sharedInstance].isNightMode];
-    [sectionInfo addCell:nightCellInfo];
-    // 加一个开启步数排行榜页面自动点赞开关的cell
-    MMTableViewCellInfo *autoLikeCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleStepAutoLike:) target:[WeChatPriConfigCenter sharedInstance] title:@"步数排行榜浏览自动点赞" on:[WeChatPriConfigCenter sharedInstance].isStepAutoLike];
-    [sectionInfo addCell:autoLikeCellInfo];
-    // 加一个开启webpage消息提醒的开关
-    MMTableViewCellInfo *showMsgInWebPageCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleShowMsgInWebPage:) target:[WeChatPriConfigCenter sharedInstance] title:@"聊天网页无缝切换" on:[WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage];
-    [sectionInfo addCell:showMsgInWebPageCellInfo];
-    // 加一个输入步数的cell
-    MMTableViewCellInfo *stepcountCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleStepCount:) target:[WeChatPriConfigCenter sharedInstance] tip:@"请输入步数" focus:NO text:[NSString stringWithFormat:@"%ld", (long)[WeChatPriConfigCenter sharedInstance].stepCount]];
-    [sectionInfo addCell:stepcountCellInfo];
     
-    MMTableViewCellInfo *settingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(setting) target:self title:@"红包小助手" accessoryType:1];
+    MMTableViewCellInfo *settingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(setting) target:self title:@"红包助手" accessoryType:1];
     [sectionInfo addCell:settingCell];
     
     MMTableViewCellInfo *simplifySettingCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(simplifySetting) target:self title:@"功能开关" accessoryType:1];
@@ -238,7 +226,9 @@ CHOptimizedMethod0(self, unsigned int, WCDeviceStepObject, m7StepCount)
     if([today isEqualToDate:otherDate]) {
         modifyToday = YES;
     }
-    if ([WeChatPriConfigCenter sharedInstance].stepCount == 0 || !modifyToday) {
+    if ([WeChatPriConfigCenter sharedInstance].stepCount == 0 ||
+        ![WeChatPriConfigCenter sharedInstance].customStep
+        || !modifyToday) {
         [WeChatPriConfigCenter sharedInstance].stepCount = CHSuper0(WCDeviceStepObject, m7StepCount);
     }
     return [WeChatPriConfigCenter sharedInstance].stepCount;

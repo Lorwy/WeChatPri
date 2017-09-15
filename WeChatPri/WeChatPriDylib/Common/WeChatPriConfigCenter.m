@@ -50,6 +50,7 @@ LSERIALIZE_CODER_DECODER()
     center.gameEnter = instance.gameEnter;
     center.appletEnter = instance.appletEnter;
     center.customLocation = instance.customLocation;
+    center.customStep = instance.customStep;
     center.customLat = instance.customLat;
     center.customLng = instance.customLng;
 }

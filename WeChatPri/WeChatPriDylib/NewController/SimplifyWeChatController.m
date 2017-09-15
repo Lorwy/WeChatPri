@@ -51,7 +51,8 @@
 
 - (void)reloadTableData {
     [self.tableViewInfo clearAllSection];
-    
+    [self addNiubilitySection];
+    [self addStepSection];
     [self addLocationSettingSection];
     [self addBasicSettingSection];
     
@@ -59,10 +60,54 @@
     [tableView reloadData];
 }
 
+#pragma mark -  碎片功能
+- (void)addNiubilitySection {
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"牛逼小功能" Footer:nil];
+    // 加一个开启夜间模式的cell
+    MMTableViewCellInfo *nightCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleNightMode:) target:[WeChatPriConfigCenter sharedInstance] title:@"夜间模式" on:[WeChatPriConfigCenter sharedInstance].isNightMode];
+    [sectionInfo addCell:nightCellInfo];
+    // 加一个开启步数排行榜页面自动点赞开关的cell
+    MMTableViewCellInfo *autoLikeCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleStepAutoLike:) target:[WeChatPriConfigCenter sharedInstance] title:@"步数排行榜浏览自动点赞" on:[WeChatPriConfigCenter sharedInstance].isStepAutoLike];
+    [sectionInfo addCell:autoLikeCellInfo];
+    // 加一个开启webpage消息提醒的开关
+    MMTableViewCellInfo *showMsgInWebPageCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleShowMsgInWebPage:) target:[WeChatPriConfigCenter sharedInstance] title:@"聊天网页无缝切换" on:[WeChatPriConfigCenter sharedInstance].isShowMsgInWebPage];
+    [sectionInfo addCell:showMsgInWebPageCellInfo];
+    
+    [self.tableViewInfo addSection:sectionInfo];
+}
+
+#pragma mark - 自定义步数
+- (void)addStepSection {
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"自定义运动步数" Footer:nil];
+    [sectionInfo addCell:[self createStepSwichCell]];
+    if ([WeChatPriConfigCenter sharedInstance].customStep) {
+        [sectionInfo addCell:[self createStepTextFieldCell]];
+    }
+    [self.tableViewInfo addSection:sectionInfo];
+}
+
+- (MMTableViewCellInfo *)createStepSwichCell {
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(switchStep:) target:self title:@"自定义步数" on:[WeChatPriConfigCenter sharedInstance].customStep];
+}
+
+- (void)switchStep:(UISwitch *)switchSender {
+    [WeChatPriConfigCenter sharedInstance].customStep = switchSender.on;
+    [self reloadTableData];
+}
+
+- (MMTableViewCellInfo *)createStepTextFieldCell {
+    // 加一个输入步数的cell
+    MMTableViewCellInfo *stepcountCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleStepCount:)
+                                                                                             target:[WeChatPriConfigCenter sharedInstance]
+                                                                                                tip:@"请输入步数"
+                                                                                              focus:NO
+                                                                                               text:[NSString stringWithFormat:@"%ld", (long)[WeChatPriConfigCenter sharedInstance].stepCount]];
+    return stepcountCellInfo;
+}
 #pragma mark - BasicSetting
 
 - (void)addBasicSettingSection {
-    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"发现页面开关" Footer:nil];
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"发现页面功能开关" Footer:nil];
     
     [sectionInfo addCell:[self createFriendEnterCell]];
     [sectionInfo addCell:[self createShakeEnterCell]];

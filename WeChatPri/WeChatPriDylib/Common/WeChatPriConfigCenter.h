@@ -25,6 +25,7 @@
 //@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
 @property (nonatomic, copy) NSString *currentUserName;
 @property (nonatomic, assign) BOOL customLocation;
+@property (nonatomic, assign) BOOL customStep;
 
 @property (nonatomic, copy) NSString* customLat;
 @property (nonatomic, copy) NSString* customLng;
