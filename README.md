@@ -1,58 +1,90 @@
 # WeChatPri
-个人版微信
+个人版微信，改来个人使用的，更方便，体验更好
+
+注：感谢以下大佬：[Monkey](https://github.com/AloneMonkey)、[锅神](https://github.com/buginux)、[鱼神](https://github.com/yulingtianxia)、[TKkk-iOSer](https://github.com/TKkk-iOSer)。。。
 
 # 功能介绍
-感谢以下大佬：Monkey、锅神、鱼神等等。。。
+
 
 Monkey：https://github.com/AloneMonkey/MonkeyDev
 
-【√】新增步数排行榜自动点赞功能
 
-【√】添加网页浏览时收到消息实时提醒（无需退出网页）
+- [√] 自定义自己位置
 
-【√】点击消息可进入聊天界面，并可再次切换到网页界面继续之前的网页浏览
+- [√] 动态添加位置选择列表
 
-【×】朋友圈浏览自动点赞功能尚在yy中
+- [√] 步数排行榜自动点赞功能
 
-站在大佬们的肩膀上用MonkeyDev做了自己用的微信，主要有以下功能：
+- [√] 添加网页浏览时收到消息实时提醒（无需退出网页）
 
-鱼神：https://github.com/yulingtianxia/FishChat
+- [√] 点击消息可进入聊天界面，并可再次切换到网页界面继续之前的网页浏览
 
-1、屏蔽群消息，好友消息（对方无察觉）
+- [x] 朋友圈浏览自动点赞功能尚在yy中
 
-2、动态关闭发现页面功能入口（可在我->设置->功能开关 页面设置）
+- [√] 动态关闭发现页面功能入口（可在我->设置->功能开关 页面设置）
 
-3、修改微信运动步数（在我->设置-中输入步数）
+- [√] 修改微信运动步数（在我->设置-中输入步数）
 
-4、去除各种小红点提示
+- [√] 去除各种小红点提示
 
-5、设置夜间模式
+- [√] 屏蔽群消息，好友消息（对方无察觉）
 
+- [√] 设置夜间模式
 
+- [√] 抢红包功能
 
+- [√] 阻止撤回消息
 
-锅神：https://github.com/buginux/WeChatRedEnvelop
+- [√] 自动通过好友请求
 
-1、抢红包功能
+- [√] 请求自动通过后发送欢迎语
 
-2、阻止撤回消息
+- [√] 消息自动回复
 
+- [√] 统一设置群公告
+
+- [√] 敏感词自动踢人
+
+- [√] 入群欢迎语
+
+- [√] 群消息自动回复
 
 #Image
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155037.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/0.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155604.png)
+##抢红包功能
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/1_.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/1_0.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155713.png)
+##小功能列表
+ ![https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_0.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155751.png)
+##自定义位置
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_0.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_1.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_2.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_3.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_4.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155824.png)
+##夜间模式
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_2_0.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_2_1.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155905.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-155941.png)
+##聊天网页之间的切换，点击可进入聊天窗口，点击网页按钮可以回到网页继续浏览
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_3_0.png)
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/WX20170818-160010.png)
-          
+##修改运动步数
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_4_0.png)
+
+##修改发现页面功能
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_5_0.png)
+
+##群助手和自动回复，自动添加好友功能
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/3_.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/3_0.png)
+     
+
+
