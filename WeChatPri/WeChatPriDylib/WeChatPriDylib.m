@@ -35,8 +35,6 @@
 #import "TKSettingViewController.h"
 
 
-#define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
-
 // 发现页面
 CHDeclareClass(FindFriendEntryViewController)
 
@@ -94,9 +92,7 @@ CHOptimizedMethod2(self, void, MicroMessengerAppDelegate, application, UIApplica
 
 CHDeclareMethod1(void, MicroMessengerAppDelegate, applicationWillResignActive, UIApplication *, application)
 {
-    NSData *centerData = [NSKeyedArchiver archivedDataWithRootObject:[WeChatPriConfigCenter sharedInstance]];
-    [[NSUserDefaults standardUserDefaults] setObject:centerData forKey:WeChatPriConfigCenterKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [WeChatPriConfigCenter saveConfigCenter];
 }
 
 
@@ -757,7 +753,7 @@ CHOptimizedMethod3(self, id, CMessageMgr, GetHelloUsers, id, arg1, Limit, unsign
 CHDeclareMethod1(void, CMessageMgr, autoReplyWithMessageWrap, CMessageWrap *, wrap) {
     BOOL autoReplyEnable = [[TKRobotConfig sharedConfig] autoReplyEnable];
     NSString *autoReplyContent = [[TKRobotConfig sharedConfig] autoReplyText];
-    if (!autoReplyEnable || autoReplyContent == nil || [autoReplyContent isEqualToString:@""]) {                                                     // 是否开启自动回复
+    if (!autoReplyEnable || !VALID_STRING(autoReplyContent)) {                                                     // 是否开启自动回复
         return;
     }
     
@@ -781,7 +777,7 @@ CHDeclareMethod1(void, CMessageMgr, removeMemberWithMessageWrap, CMessageWrap *,
     NSString *content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
     NSMutableArray *array = [[TKRobotConfig sharedConfig] chatRoomSensitiveArray];
     [array enumerateObjectsUsingBlock:^(NSString *text, NSUInteger idx, BOOL * _Nonnull stop) {
-        if([content isEqualToString:text]) {
+        if([content containsString:text]) {
             [groupMgr DeleteGroupMember:wrap.m_nsFromUsr withMemberList:@[wrap.m_nsRealChatUsr] scene:3074516140857229312];
         }
     }];

@@ -48,4 +48,5 @@
 @property (nonatomic, assign) BOOL chatRoomSensitiveEnable;
 @property (nonatomic, strong) NSMutableArray *chatRoomSensitiveArray;        /**<    群聊敏感词    */
 
+
 @end

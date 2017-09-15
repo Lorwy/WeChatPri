@@ -28,8 +28,22 @@ LSERIALIZE_CODER_DECODER()
     self = [super init];
     if (self) {
         self.chatIgnoreInfo = [NSMutableDictionary dictionary];
+        self.customLocationArray = [NSMutableArray array];
     }
     return self;
+}
+
+- (NSMutableArray *)customLocationArray {
+    if (!_customLocationArray) {
+        _customLocationArray = [NSMutableArray array];
+    }
+    return _customLocationArray;
+}
+
++ (void)saveConfigCenter {
+    NSData *centerData = [NSKeyedArchiver archivedDataWithRootObject:[WeChatPriConfigCenter sharedInstance]];
+    [[NSUserDefaults standardUserDefaults] setObject:centerData forKey:WeChatPriConfigCenterKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)loadInstance:(WeChatPriConfigCenter *)instance {
@@ -50,6 +64,7 @@ LSERIALIZE_CODER_DECODER()
     center.gameEnter = instance.gameEnter;
     center.appletEnter = instance.appletEnter;
     center.customLocation = instance.customLocation;
+    center.customLocationArray = instance.customLocationArray;
     center.customStep = instance.customStep;
     center.customLat = instance.customLat;
     center.customLng = instance.customLng;

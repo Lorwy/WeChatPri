@@ -11,6 +11,7 @@
 #import "WBMultiSelectGroupsViewController.h"
 #import "WeChatPriConfigCenter.h"
 #import "WeChatRedEnvelop.h"
+#import "CustomLocationViewController.h"
 
 @interface SimplifyWeChatController ()
 
@@ -53,7 +54,7 @@
     [self.tableViewInfo clearAllSection];
     [self addNiubilitySection];
     [self addStepSection];
-    [self addLocationSettingSection];
+//    [self addLocationSettingSection];
     [self addBasicSettingSection];
     
     MMTableView *tableView = [self.tableViewInfo getTableView];
@@ -63,6 +64,9 @@
 #pragma mark -  碎片功能
 - (void)addNiubilitySection {
     MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"牛逼小功能" Footer:nil];
+    // 选择位置的cell
+    MMTableViewCellInfo *setLoactionCell = [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(setLoaction) target:self title:@"自定义位置" accessoryType:1];
+    [sectionInfo addCell:setLoactionCell];
     // 加一个开启夜间模式的cell
     MMTableViewCellInfo *nightCellInfo = [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(handleNightMode:) target:[WeChatPriConfigCenter sharedInstance] title:@"夜间模式" on:[WeChatPriConfigCenter sharedInstance].isNightMode];
     [sectionInfo addCell:nightCellInfo];
@@ -194,8 +198,7 @@
     [self reloadTableData];
 }
 
-
-// MARK: 自定义经纬度的
+#pragma mark - 自定义经纬度的
 - (void)addLocationSettingSection {
     MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoHeader:@"自定义位置(输入完成需要点键盘上的完成按钮)" Footer:nil];
     [sectionInfo addCell:[self createLocationSwichCell]];
@@ -223,6 +226,11 @@
 - (MMTableViewCellInfo *)createLocationLngSwichCell {
     MMTableViewCellInfo *lngCellInfo = [objc_getClass("MMTableViewCellInfo") editorCellForSel:@selector(handleCustomLng:) target:[WeChatPriConfigCenter sharedInstance] tip:@"纬度" focus:NO text:[WeChatPriConfigCenter sharedInstance].customLng];
     return lngCellInfo;
+}
+
+- (void)setLoaction {
+    CustomLocationViewController *customVC = [CustomLocationViewController new];
+    [self.navigationController pushViewController:customVC animated:YES];
 }
 
 @end

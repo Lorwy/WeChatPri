@@ -47,6 +47,10 @@
 		0434C1011F380C1200B49000 /* WeChatRedEnvelop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434C0F01F380C1200B49000 /* WeChatRedEnvelop.h */; };
 		0434C1021F380C1200B49000 /* WeChatRedEnvelopParam.h in Headers */ = {isa = PBXBuildFile; fileRef = 0434C0F11F380C1200B49000 /* WeChatRedEnvelopParam.h */; };
 		0434C1031F380C1200B49000 /* WeChatRedEnvelopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 0434C0F21F380C1200B49000 /* WeChatRedEnvelopParam.m */; };
+		046DDD921F6B666F004E429F /* CustomLocationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 046DDD901F6B666F004E429F /* CustomLocationViewController.h */; };
+		046DDD931F6B666F004E429F /* CustomLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DDD911F6B666F004E429F /* CustomLocationViewController.m */; };
+		046DDD9B1F6B6BB2004E429F /* WeChatLocationManage.h in Headers */ = {isa = PBXBuildFile; fileRef = 046DDD991F6B6BB2004E429F /* WeChatLocationManage.h */; };
+		046DDD9C1F6B6BB2004E429F /* WeChatLocationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DDD9A1F6B6BB2004E429F /* WeChatLocationManage.m */; };
 		04847F281F3409420050C32F /* put ipa or app here in Resources */ = {isa = PBXBuildFile; fileRef = 04847F271F3409420050C32F /* put ipa or app here */; };
 		04847F311F3409420050C32F /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04847F301F3409420050C32F /* Cycript.framework */; };
 		04847F331F3409420050C32F /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04847F321F3409420050C32F /* JavaScriptCore.framework */; };
@@ -119,6 +123,10 @@
 		0434C0F01F380C1200B49000 /* WeChatRedEnvelop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatRedEnvelop.h; sourceTree = "<group>"; };
 		0434C0F11F380C1200B49000 /* WeChatRedEnvelopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatRedEnvelopParam.h; sourceTree = "<group>"; };
 		0434C0F21F380C1200B49000 /* WeChatRedEnvelopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatRedEnvelopParam.m; sourceTree = "<group>"; };
+		046DDD901F6B666F004E429F /* CustomLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLocationViewController.h; sourceTree = "<group>"; };
+		046DDD911F6B666F004E429F /* CustomLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLocationViewController.m; sourceTree = "<group>"; };
+		046DDD991F6B6BB2004E429F /* WeChatLocationManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatLocationManage.h; sourceTree = "<group>"; };
+		046DDD9A1F6B6BB2004E429F /* WeChatLocationManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatLocationManage.m; sourceTree = "<group>"; };
 		04847F231F3409420050C32F /* WeChatPri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChatPri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04847F271F3409420050C32F /* put ipa or app here */ = {isa = PBXFileReference; lastKnownFileType = text; name = "put ipa or app here"; path = "TargetApp/put ipa or app here"; sourceTree = "<group>"; };
 		04847F291F3409420050C32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,6 +191,8 @@
 				0426E1B91F68C99800449CF4 /* TKRobotConfig.m */,
 				0426E1C01F68C9AB00449CF4 /* TKToast.h */,
 				0426E1C11F68C9AB00449CF4 /* TKToast.m */,
+				046DDD991F6B6BB2004E429F /* WeChatLocationManage.h */,
+				046DDD9A1F6B6BB2004E429F /* WeChatLocationManage.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -192,6 +202,8 @@
 			children = (
 				0426E19E1F68C34500449CF4 /* SimplifyWeChatController.h */,
 				0426E19F1F68C34500449CF4 /* SimplifyWeChatController.m */,
+				046DDD901F6B666F004E429F /* CustomLocationViewController.h */,
+				046DDD911F6B666F004E429F /* CustomLocationViewController.m */,
 				0426E1AC1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.h */,
 				0426E1AD1F68C98E00449CF4 /* TKChatRoomSensitiveViewController.m */,
 				0426E1AE1F68C98E00449CF4 /* TKEditViewController.h */,
@@ -226,6 +238,13 @@
 				0434C0F21F380C1200B49000 /* WeChatRedEnvelopParam.m */,
 			);
 			path = RedEnvelop;
+			sourceTree = "<group>";
+		};
+		046DDD941F6B69A9004E429F /* WeChatPriModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WeChatPriModel;
 			sourceTree = "<group>";
 		};
 		04847F191F3409410050C32F = {
@@ -281,6 +300,7 @@
 		04847F3A1F3409420050C32F /* WeChatPriDylib */ = {
 			isa = PBXGroup;
 			children = (
+				046DDD941F6B69A9004E429F /* WeChatPriModel */,
 				0426E1941F68C34500449CF4 /* Common */,
 				0426E19D1F68C34500449CF4 /* NewController */,
 				04A613C91F5412E100206D63 /* Category */,
@@ -358,6 +378,7 @@
 				0434C1021F380C1200B49000 /* WeChatRedEnvelopParam.h in Headers */,
 				04847F421F3409420050C32F /* CaptainHook.h in Headers */,
 				0426E1A61F68C34500449CF4 /* WeChatPriUtil.h in Headers */,
+				046DDD921F6B666F004E429F /* CustomLocationViewController.h in Headers */,
 				0426E1A51F68C34500449CF4 /* WeChatPriGloabDefine.h in Headers */,
 				0426E1A81F68C34500449CF4 /* SimplifyWeChatController.h in Headers */,
 				0426E1B41F68C98E00449CF4 /* TKEditViewController.h in Headers */,
@@ -381,6 +402,7 @@
 				0434C0FB1F380C1200B49000 /* WBRedEnvelopParamQueue.h in Headers */,
 				0434C0FD1F380C1200B49000 /* WBRedEnvelopTaskManager.h in Headers */,
 				04A613CC1F5412E100206D63 /* UILabel+AutoResize.h in Headers */,
+				046DDD9B1F6B6BB2004E429F /* WeChatLocationManage.h in Headers */,
 				0426E1BE1F68C99F00449CF4 /* TKSettingViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,8 +551,10 @@
 				0434C0F41F380C1200B49000 /* WBBaseViewController.m in Sources */,
 				0426E1A11F68C34500449CF4 /* WeChatNewsMsgManager.m in Sources */,
 				0426E1A91F68C34500449CF4 /* SimplifyWeChatController.m in Sources */,
+				046DDD9C1F6B6BB2004E429F /* WeChatLocationManage.m in Sources */,
 				0426E1B51F68C98E00449CF4 /* TKEditViewController.m in Sources */,
 				0426E1BB1F68C99800449CF4 /* TKRobotConfig.m in Sources */,
+				046DDD931F6B666F004E429F /* CustomLocationViewController.m in Sources */,
 				0434C0FE1F380C1200B49000 /* WBRedEnvelopTaskManager.m in Sources */,
 				0426E1BF1F68C99F00449CF4 /* TKSettingViewController.m in Sources */,
 				0426E1A71F68C34500449CF4 /* WeChatPriUtil.m in Sources */,

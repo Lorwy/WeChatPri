@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
+#define WeChatPriConfigCenterKey @"WeChatPriConfigCenterKey"
 
 /**
  配置中心
@@ -25,6 +26,7 @@
 //@property (nonatomic, getter=onRevokeMsg) BOOL revokeMsg;
 @property (nonatomic, copy) NSString *currentUserName;
 @property (nonatomic, assign) BOOL customLocation;
+@property (nonatomic, strong) NSMutableArray *customLocationArray;        /**<    自己添加的地点    */
 @property (nonatomic, assign) BOOL customStep;
 
 @property (nonatomic, copy) NSString* customLat;
@@ -40,6 +42,7 @@
 @property (nonatomic, assign) BOOL appletEnter;
 
 + (instancetype)sharedInstance;
++ (void)saveConfigCenter;
 + (void)loadInstance:(WeChatPriConfigCenter *)instance;
 
 - (void)handleNightMode:(UISwitch *)sender;
