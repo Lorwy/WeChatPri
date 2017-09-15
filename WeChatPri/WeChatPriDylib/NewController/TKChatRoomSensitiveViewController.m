@@ -119,7 +119,7 @@
 - (void)addSensitiveAction {
     TKEditViewController *editVC = [[TKEditViewController alloc] init];
     editVC.title = @"新增敏感词";
-    editVC.placeholder = @"当管理的群中有用户发了跟敏感词一致的内容，\n则自动将其提出该群";
+    editVC.placeholder = @"当管理的群中有用户发了包含该项所有敏感词一致的内容，\n则自动将其提出该群，多项以||分隔";
     [editVC setEndEditing:^(NSString *text) {
         __block BOOL isRepetition = NO;
         [self.chatRoomSensitiveArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -146,7 +146,7 @@
     NSInteger index = [agr.userInfo[@"index"] integerValue];
     TKEditViewController *editVC = [[TKEditViewController alloc] init];
     editVC.title = @"编辑敏感词";
-    editVC.placeholder = @"当管理的群中有用户发了跟敏感词一致的内容，\n则自动将其提出该群";
+    editVC.placeholder = @"当管理的群中有用户发了包含该项所有敏感词一致的内容，\n则自动将其提出该群，多项以||分隔";
     editVC.text = agr.userInfo[@"text"];
     [editVC setEndEditing:^(NSString *text) {
         __block BOOL isRepetition = NO;

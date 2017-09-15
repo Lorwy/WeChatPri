@@ -777,7 +777,14 @@ CHDeclareMethod1(void, CMessageMgr, removeMemberWithMessageWrap, CMessageWrap *,
     NSString *content = [wrap valueForKeyPath:@"m_nsLastDisplayContent"];
     NSMutableArray *array = [[TKRobotConfig sharedConfig] chatRoomSensitiveArray];
     [array enumerateObjectsUsingBlock:^(NSString *text, NSUInteger idx, BOOL * _Nonnull stop) {
-        if([content containsString:text]) {
+        NSArray *tempArray =  [text componentsSeparatedByString:@"||"];
+        __block BOOL remove = YES;
+        [tempArray enumerateObjectsUsingBlock:^(NSString *text, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (![content containsString:text]) {
+                remove = NO;
+            }
+        }];
+        if(remove) {
             [groupMgr DeleteGroupMember:wrap.m_nsFromUsr withMemberList:@[wrap.m_nsRealChatUsr] scene:3074516140857229312];
         }
     }];
