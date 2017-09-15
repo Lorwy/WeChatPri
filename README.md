@@ -9,59 +9,62 @@
 Monkey：https://github.com/AloneMonkey/MonkeyDev
 
 
-- [√] 自定义自己位置
+- [v] 自定义自己位置
 
-- [√] 动态添加位置选择列表
+- [v] 动态添加位置选择列表
 
-- [√] 步数排行榜自动点赞功能
+- [v] 步数排行榜自动点赞功能
 
-- [√] 添加网页浏览时收到消息实时提醒（无需退出网页）
+- [v] 添加网页浏览时收到消息实时提醒（无需退出网页）
 
-- [√] 点击消息可进入聊天界面，并可再次切换到网页界面继续之前的网页浏览
+- [v] 点击消息可进入聊天界面，并可再次切换到网页界面继续之前的网页浏览
 
 - [x] 朋友圈浏览自动点赞功能尚在yy中
 
-- [√] 动态关闭发现页面功能入口（可在我->设置->功能开关 页面设置）
+- [v] 动态关闭发现页面功能入口（可在我->设置->功能开关 页面设置）
 
-- [√] 修改微信运动步数（在我->设置-中输入步数）
+- [v] 修改微信运动步数（在我->设置-中输入步数）
 
-- [√] 去除各种小红点提示
+- [v] 去除各种小红点提示
 
-- [√] 屏蔽群消息，好友消息（对方无察觉）
+- [v] 屏蔽群消息，好友消息（对方无察觉）
 
-- [√] 设置夜间模式
+- [v] 设置夜间模式
 
-- [√] 抢红包功能
+- [v] 抢红包功能
 
-- [√] 阻止撤回消息
+- [v] 阻止撤回消息
 
-- [√] 自动通过好友请求
+- [v] 自动通过好友请求
 
-- [√] 请求自动通过后发送欢迎语
+- [v] 请求自动通过后发送欢迎语
 
-- [√] 消息自动回复
+- [v] 消息自动回复
 
-- [√] 统一设置群公告
+- [v] 统一设置群公告
 
-- [√] 敏感词自动踢人
+- [v] 敏感词自动踢人
 
-- [√] 入群欢迎语
+- [v] 入群欢迎语
 
-- [√] 群消息自动回复
+- [v] 群消息自动回复
 
 #Image
 
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/0.png)
 
 ##抢红包功能
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/1_.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/1_0.png)
 
 ##小功能列表
+
  ![https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_0.png)
 
 ##自定义位置
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_0.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_1.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_2.png)
@@ -69,20 +72,25 @@ Monkey：https://github.com/AloneMonkey/MonkeyDev
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_1_4.png)
 
 ##夜间模式
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_2_0.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_2_1.png)
 
 
 ##聊天网页之间的切换，点击可进入聊天窗口，点击网页按钮可以回到网页继续浏览
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_3_0.png)
 
 ##修改运动步数
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_4_0.png)
 
 ##修改发现页面功能
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_5_0.png)
 
 ##群助手和自动回复，自动添加好友功能
+
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/3_.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/3_0.png)
      
