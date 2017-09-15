@@ -58,7 +58,7 @@
 
 ## 小功能列表
 
- ![https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_.png)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_.png)
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/2_0.png)
 
 ## 自定义位置
