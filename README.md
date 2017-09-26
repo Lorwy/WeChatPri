@@ -11,6 +11,8 @@
 
 - [x] 动态添加位置选择列表
 
+- [x] 进行虚拟点赞，这下谁再有发朋友圈积满赞送礼品优惠啥的还虚吗？（暂时未做设置页面，目前由自己点赞与否来控制）
+
 - [x] 步数排行榜自动点赞功能
 
 - [x] 添加网页浏览时收到消息实时提醒（无需退出网页）
@@ -52,6 +54,12 @@
 # Image
 
  ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/0.png)
+
+## 虚拟点赞
+
+   进行虚拟点赞，这下谁再有发朋友圈积满赞送礼品优惠啥的还虚吗？
+
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/4_0.PNG)
 
 ## 抢红包功能
 
