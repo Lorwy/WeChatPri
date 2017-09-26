@@ -59,7 +59,7 @@
 
    进行虚拟点赞，这下谁再有发朋友圈积满赞送礼品优惠啥的还虚吗？
 
- ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/4_0.PNG)
+ ![image](https://github.com/Lorwy/WeChatPri/blob/master/WeChatPri/Image/4_0.png)
 
 ## 抢红包功能
 
