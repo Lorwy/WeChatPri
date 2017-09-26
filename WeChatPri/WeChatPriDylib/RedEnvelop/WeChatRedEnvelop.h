@@ -174,6 +174,7 @@
 @property (nonatomic, copy) NSString *m_nsNickName;                     // 用户昵称
 @property (nonatomic, copy) NSString *m_nsUsrName;                      // 微信id
 @property (nonatomic, copy) NSString *m_nsMemberName;
+@property (nonatomic, assign) NSInteger m_uiSex;
 
 - (id)getContactDisplayName;
 - (id)getChatRoomMemberWithoutMyself:(id)arg1;
@@ -211,6 +212,7 @@
 
 @interface CContactMgr : NSObject
 
+- (id)getAllContactUserName;
 - (id)getSelfContact;
 - (id)getContactByName:(id)arg1;
 - (id)getContactForSearchByName:(id)arg1;

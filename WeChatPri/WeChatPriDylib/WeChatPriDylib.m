@@ -1098,10 +1098,29 @@ CHOptimizedMethod0(self, void, CLLocationManager, startUpdatingLocation) {
 //CHOptimizedMethod1(self, void, WCTimeLineCellView, onCommentPhoto, id , arg1) {
 //    CHSuper1(WCTimeLineCellView, onCommentPhoto, arg1);
 //}
+
+CHDeclareClass(WCTimeLineCommentCellView)
+
+CHClassMethod1(id, WCTimeLineCommentCellView, getNickNameForDataItem, id, arg1) {
+    NSString *result = (NSString *)CHSuper1(WCTimeLineCommentCellView, getNickNameForDataItem, arg1);
+    NSMutableString *re = [NSMutableString stringWithString:result];
+    CContactMgr *contactMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+    CContact *selfContact = [contactMgr getSelfContact];
+    if([result containsString:selfContact.m_nsUsrName]) {
+        NSArray *contactList = [contactMgr getContactList:1 contactType:0];
+        for (int i = 0; i < contactList.count; i++) {
+            CContact *contact = contactList[i];
+            if(contact.m_uiSex == 1 || contact.m_uiSex == 2 ) {
+                NSString *str = [NSString stringWithFormat:@",<_wc_custom_link_ href=\"weixin://WC/%@\" color=\"TIMELINE_NAME_COLOR\" font=\"#album_comment_view font\" dynamic_font=1><![CDATA[%@]]></_wc_custom_link_>",contact.m_nsUsrName,contact.m_nsNickName];
+                [re appendString:str];
+            }
+        }
+    }
+
+    return re;
+}
+
 //
-//
-//
-////
 //CHDeclareClass(WCLikeButton)
 //CHOptimizedMethod1(self, void, WCLikeButton, initWithDataItem, id, arg1) {
 //    CHSuper1(WCLikeButton, initWithDataItem, arg1);
@@ -1162,6 +1181,10 @@ CHConstructor{
 //    CHLoadLateClass(WCLikeButton);
 //    CHHook1(WCLikeButton, initWithDataItem);
 //    CHHook0(WCLikeButton, onLikeFriend);
+    
+    // 无限赞
+    CHLoadLateClass(WCTimeLineCommentCellView);
+    CHHook1(WCTimeLineCommentCellView, getNickNameForDataItem);
 
     
     // 自动添加好友

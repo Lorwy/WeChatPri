@@ -120,6 +120,14 @@ typedef NS_ENUM(NSUInteger, TKArrayTpye) {
 
 @end
 
+@interface WCTimeLineCommentCellView : UIView
+
++ (double)getCellHeightForDataItem:(id)arg1 RowIndex:(long long)arg2;
++ (id)getNickNameForDataItem:(id)arg1;
+- (void)onReloadCommentCellView:(id)arg1;
+
+@end
+
 #pragma mark - setp
 @interface WCDeviceStepObject: NSObject
 
