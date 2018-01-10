@@ -1025,53 +1025,56 @@ CHOptimizedMethod1(self, void, CEmoticonUploadMgr, StartUpload, id, arg1) {
     }
 }
 
-//CHDeclareClass(CLLocationManager)
-//CHOptimizedMethod0(self, void, CLLocationManager, startUpdatingLocation) {
-//    if([WeChatPriConfigCenter sharedInstance].customLocation &&
-//       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLat) &&
-//       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLng))
-//    {
-//        CGFloat lat = [[WeChatPriConfigCenter sharedInstance].customLat doubleValue];
-//        CGFloat lng = [[WeChatPriConfigCenter sharedInstance].customLng doubleValue];
-//        if (lat < 0.1 || lng < 0.1) {
-//            lat = 35.707013;
-//            lng = 139.730562;
-//        }
-//        
-//        CLLocation *tokyoLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-//        
-//        CLLocation *cantonLocation = [[CLLocation alloc] initWithLatitude:23.127444 longitude:113.257217];
-//        
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self.delegate locationManager:self didUpdateToLocation:tokyoLocation fromLocation:cantonLocation];
-//        });
-//#pragma clang diagnostic pop
-//    } else {
-//        CHSuper0(CLLocationManager,startUpdatingLocation);
-//    }
-//}
-
-CHDeclareClass(CLLocation)
-CHDeclareMethod0(CLLocationCoordinate2D, CLLocation, coordinate) {
+CHDeclareClass(CLLocationManager)
+CHOptimizedMethod0(self, void, CLLocationManager, startUpdatingLocation) {
     if([WeChatPriConfigCenter sharedInstance].customLocation &&
        VALID_STRING([WeChatPriConfigCenter sharedInstance].customLat) &&
        VALID_STRING([WeChatPriConfigCenter sharedInstance].customLng))
     {
-        CLLocationCoordinate2D location;
-        double lat = [[WeChatPriConfigCenter sharedInstance].customLat doubleValue];
-        double lng = [[WeChatPriConfigCenter sharedInstance].customLng doubleValue];
+        CGFloat lat = [[WeChatPriConfigCenter sharedInstance].customLat doubleValue];
+        CGFloat lng = [[WeChatPriConfigCenter sharedInstance].customLng doubleValue];
         if (lat < 0.1 || lng < 0.1) {
             lat = 35.707013;
             lng = 139.730562;
         }
-        location = CLLocationCoordinate2DMake(lat, lng);
-        return location;
+        
+        CLLocation *tokyoLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        
+        CLLocation *cantonLocation = [[CLLocation alloc] initWithLatitude:23.127444 longitude:113.257217];
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.delegate locationManager:self didUpdateToLocation:tokyoLocation fromLocation:cantonLocation];
+        });
+#pragma clang diagnostic pop
     } else {
-        return CHSuper0(CLLocation, coordinate);
+        CHSuper0(CLLocationManager,startUpdatingLocation);
     }
 }
+
+//CHDeclareClass(CLLocation)
+//CHDeclareMethod0(CLLocationCoordinate2D, CLLocation, coordinate) {
+//    if([WeChatPriConfigCenter sharedInstance].customLocation &&
+//       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLat) &&
+//       VALID_STRING([WeChatPriConfigCenter sharedInstance].customLng))
+//    {
+//        CLLocationCoordinate2D location;
+//        double lat = [[WeChatPriConfigCenter sharedInstance].customLat doubleValue];
+//        double lng = [[WeChatPriConfigCenter sharedInstance].customLng doubleValue];
+//        if (lat < 0.1 || lng < 0.1) {
+//            lat = 35.707013;
+//            lng = 139.730562;
+//        }
+//        location = CLLocationCoordinate2DMake(lat, lng);
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//        return location;
+//#pragma clang diagnostic pop
+//    } else {
+//        return CHSuper0(CLLocation, coordinate);
+//    }
+//}
 
 // MARK: 朋友圈
 //CHDeclareClass(WCOperateFloatView)
@@ -1220,10 +1223,10 @@ CHConstructor{
     CHLoadLateClass(CEmoticonUploadMgr);
     CHHook1(CEmoticonUploadMgr, StartUpload);
     
-//    CHLoadLateClass(CLLocationManager);
-//    CHHook0(CLLocationManager, startUpdatingLocation);
+    CHLoadLateClass(CLLocationManager);
+    CHHook0(CLLocationManager, startUpdatingLocation);
     
-    CHLoadLateClass(CLLocation);
-    CHHook0(CLLocation, coordinate);
+//    CHLoadLateClass(CLLocation);
+//    CHHook0(CLLocation, coordinate);
 }
 

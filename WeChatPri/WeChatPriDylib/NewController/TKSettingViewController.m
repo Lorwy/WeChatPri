@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self reloadTableData];
     [self initTitle];
     MMTableView *tableView = [self.tableViewInfo getTableView];

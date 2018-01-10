@@ -240,13 +240,6 @@
 			path = RedEnvelop;
 			sourceTree = "<group>";
 		};
-		046DDD941F6B69A9004E429F /* WeChatPriModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WeChatPriModel;
-			sourceTree = "<group>";
-		};
 		04847F191F3409410050C32F = {
 			isa = PBXGroup;
 			children = (
@@ -300,7 +293,6 @@
 		04847F3A1F3409420050C32F /* WeChatPriDylib */ = {
 			isa = PBXGroup;
 			children = (
-				046DDD941F6B69A9004E429F /* WeChatPriModel */,
 				0426E1941F68C34500449CF4 /* Common */,
 				0426E19D1F68C34500449CF4 /* NewController */,
 				04A613C91F5412E100206D63 /* Category */,
