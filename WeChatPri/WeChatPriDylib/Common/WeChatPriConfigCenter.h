@@ -33,8 +33,9 @@
 @property (nonatomic, copy) NSString* customLng;
 
 @property (nonatomic, assign) BOOL friendEnter;
-@property (nonatomic, assign) BOOL shakeEnter;
 @property (nonatomic, assign) BOOL scanEnter;
+@property (nonatomic, assign) BOOL shakeEnter;
+@property (nonatomic, assign) BOOL searchEnter;
 @property (nonatomic, assign) BOOL nearbydEnter;
 @property (nonatomic, assign) BOOL driftBottleEnter;
 @property (nonatomic, assign) BOOL shopEnter;
@@ -54,5 +55,7 @@
 
 - (void)handleCustomLat:(UITextField *)sender;
 - (void)handleCustomLng:(UITextField *)sender;
+
++ (BOOL)isCustomFindPage;
 
 @end

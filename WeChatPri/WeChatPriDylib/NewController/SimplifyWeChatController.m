@@ -23,9 +23,15 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _tableViewInfo = [[objc_getClass("MMTableViewInfo") alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+        _tableViewInfo = [[objc_getClass("MMTableViewInfo") alloc] initWithFrame:[self viewFrame] style:UITableViewStyleGrouped];
     }
     return self;
+}
+
+- (CGRect)viewFrame {
+    CGRect f = [UIScreen mainScreen].bounds;
+    f.size.height -= 34;
+    return f;
 }
 
 - (void)viewDidLoad {
@@ -135,6 +141,16 @@
     [self reloadTableData];
 }
 
+
+- (MMTableViewCellInfo *)createScanEnterCell {
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(scanScanEnter:) target:self title:@"扫一扫" on:[WeChatPriConfigCenter sharedInstance].scanEnter];
+}
+
+- (void)scanScanEnter:(UISwitch *)envelopSwitch {
+    [WeChatPriConfigCenter sharedInstance].scanEnter = envelopSwitch.on;
+    [self reloadTableData];
+}
+
 - (MMTableViewCellInfo *)createShakeEnterCell {
     return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(switchShakeEnter:) target:self title:@"摇一摇" on:[WeChatPriConfigCenter sharedInstance].shakeEnter];
 }
@@ -144,12 +160,12 @@
     [self reloadTableData];
 }
 
-- (MMTableViewCellInfo *)createScanEnterCell {
-    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(scanScanEnter:) target:self title:@"扫一扫" on:[WeChatPriConfigCenter sharedInstance].scanEnter];
+- (MMTableViewCellInfo *)createSearchEnterCell {
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(switchSearchEnter:) target:self title:@"搜一搜" on:[WeChatPriConfigCenter sharedInstance].searchEnter];
 }
 
-- (void)scanScanEnter:(UISwitch *)envelopSwitch {
-    [WeChatPriConfigCenter sharedInstance].scanEnter = envelopSwitch.on;
+- (void)switchSearchEnter:(UISwitch *)mSwitch {
+    [WeChatPriConfigCenter sharedInstance].searchEnter = mSwitch.on;
     [self reloadTableData];
 }
 

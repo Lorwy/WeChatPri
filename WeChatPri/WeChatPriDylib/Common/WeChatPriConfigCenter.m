@@ -56,8 +56,9 @@ LSERIALIZE_CODER_DECODER()
     center.currentUserName = instance.currentUserName;
     center.lastChangeStepCountDate = instance.lastChangeStepCountDate;
     center.friendEnter = instance.friendEnter;
-    center.shakeEnter = instance.shakeEnter;
     center.scanEnter = instance.scanEnter;
+    center.shakeEnter = instance.shakeEnter;
+    center.searchEnter = instance.searchEnter;
     center.nearbydEnter = instance.nearbydEnter;
     center.driftBottleEnter = instance.driftBottleEnter;
     center.shopEnter = instance.shopEnter;
@@ -68,6 +69,21 @@ LSERIALIZE_CODER_DECODER()
     center.customStep = instance.customStep;
     center.customLat = instance.customLat;
     center.customLng = instance.customLng;
+}
+
++ (BOOL)isCustomFindPage {
+    if ([WeChatPriConfigCenter sharedInstance].friendEnter ||
+        [WeChatPriConfigCenter sharedInstance].scanEnter ||
+        [WeChatPriConfigCenter sharedInstance].shakeEnter ||
+        [WeChatPriConfigCenter sharedInstance].searchEnter ||
+        [WeChatPriConfigCenter sharedInstance].nearbydEnter ||
+        [WeChatPriConfigCenter sharedInstance].driftBottleEnter ||
+        [WeChatPriConfigCenter sharedInstance].shopEnter ||
+        [WeChatPriConfigCenter sharedInstance].gameEnter ||
+        [WeChatPriConfigCenter sharedInstance].appletEnter) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Handle Events

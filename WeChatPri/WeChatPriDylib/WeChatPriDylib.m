@@ -109,18 +109,21 @@ CHOptimizedMethod2(self, CGFloat, FindFriendEntryViewController, tableView, UITa
               ![WeChatPriConfigCenter sharedInstance].shakeEnter) {
         return 0;
     }else if ((indexPath.section == 2 && indexPath.row == 0) &&
-             ![WeChatPriConfigCenter sharedInstance].nearbydEnter) {
-        return 0;
-    }else if ((indexPath.section == 2 && indexPath.row == 1) &&
-              ![WeChatPriConfigCenter sharedInstance].driftBottleEnter) {
+              ![WeChatPriConfigCenter sharedInstance].searchEnter) {
         return 0;
     }else if ((indexPath.section == 3 && indexPath.row == 0) &&
-              ![WeChatPriConfigCenter sharedInstance].shopEnter) {
+             ![WeChatPriConfigCenter sharedInstance].nearbydEnter) {
         return 0;
     }else if ((indexPath.section == 3 && indexPath.row == 1) &&
-              ![WeChatPriConfigCenter sharedInstance].gameEnter) {
+              ![WeChatPriConfigCenter sharedInstance].driftBottleEnter) {
         return 0;
     }else if ((indexPath.section == 4 && indexPath.row == 0) &&
+              ![WeChatPriConfigCenter sharedInstance].shopEnter) {
+        return 0;
+    }else if ((indexPath.section == 4 && indexPath.row == 1) &&
+              ![WeChatPriConfigCenter sharedInstance].gameEnter) {
+        return 0;
+    }else if ((indexPath.section == 5 && indexPath.row == 0) &&
               ![WeChatPriConfigCenter sharedInstance].appletEnter) {
         return 0;
     }
@@ -140,22 +143,157 @@ CHOptimizedMethod2(self, UITableViewCell *, FindFriendEntryViewController, table
               ![WeChatPriConfigCenter sharedInstance].shakeEnter) {
         [self cleanCell:cell];
     }else if ((indexPath.section == 2 && indexPath.row == 0) &&
-              ![WeChatPriConfigCenter sharedInstance].nearbydEnter) {
-        [self cleanCell:cell];
-    }else if ((indexPath.section == 2 && indexPath.row == 1) &&
-              ![WeChatPriConfigCenter sharedInstance].driftBottleEnter) {
+              ![WeChatPriConfigCenter sharedInstance].searchEnter) {
         [self cleanCell:cell];
     }else if ((indexPath.section == 3 && indexPath.row == 0) &&
-              ![WeChatPriConfigCenter sharedInstance].shopEnter) {
+              ![WeChatPriConfigCenter sharedInstance].nearbydEnter) {
         [self cleanCell:cell];
     }else if ((indexPath.section == 3 && indexPath.row == 1) &&
-              ![WeChatPriConfigCenter sharedInstance].gameEnter) {
+              ![WeChatPriConfigCenter sharedInstance].driftBottleEnter) {
         [self cleanCell:cell];
     }else if ((indexPath.section == 4 && indexPath.row == 0) &&
+              ![WeChatPriConfigCenter sharedInstance].shopEnter) {
+        [self cleanCell:cell];
+    }else if ((indexPath.section == 4 && indexPath.row == 1) &&
+              ![WeChatPriConfigCenter sharedInstance].gameEnter) {
+        [self cleanCell:cell];
+    }else if ((indexPath.section == 5 && indexPath.row == 0) &&
               ![WeChatPriConfigCenter sharedInstance].appletEnter) {
         [self cleanCell:cell];
     }
     return cell;
+}
+
+CHOptimizedMethod2(self, float, FindFriendEntryViewController, tableView, UITableView *, tableView, heightForHeaderInSection, unsigned int, section)
+{
+    if (section == 0) {
+        if (![WeChatPriConfigCenter sharedInstance].friendEnter) {
+            return 0.001;
+        }
+    } else if(section == 1) {
+        if ((![WeChatPriConfigCenter sharedInstance].scanEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].shakeEnter)) {
+            return 0.001;
+        }
+    } else if(section == 2) {
+        if ((![WeChatPriConfigCenter sharedInstance].searchEnter)) {
+            return 0.001;
+        }
+    } else if(section == 3) {
+        if ((![WeChatPriConfigCenter sharedInstance].nearbydEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].driftBottleEnter)) {
+            return 0.001;
+        }
+    } else if(section == 4) {
+        if ((![WeChatPriConfigCenter sharedInstance].shopEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].gameEnter)) {
+            return 0.001;
+        }
+    } else if(section == 5) {
+        if ((![WeChatPriConfigCenter sharedInstance].appletEnter)) {
+            return 0.001;
+        }
+    }
+    return CHSuper2(FindFriendEntryViewController, tableView, tableView, heightForHeaderInSection, section);
+}
+
+CHOptimizedMethod2(self, float, FindFriendEntryViewController, tableView, UITableView *, tableView, heightForFooterInSection, unsigned int, section)
+{
+    if (section == 0) {
+        if (![WeChatPriConfigCenter sharedInstance].friendEnter) {
+            return 0.001;
+        }
+    } else if(section == 1) {
+        if ((![WeChatPriConfigCenter sharedInstance].scanEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].shakeEnter)) {
+            return 0.001;
+        }
+    } else if(section == 2) {
+        if ((![WeChatPriConfigCenter sharedInstance].searchEnter)) {
+            return 0.001;
+        }
+    } else if(section == 3) {
+        if ((![WeChatPriConfigCenter sharedInstance].nearbydEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].driftBottleEnter)) {
+            return 0.001;
+        }
+    } else if(section == 4) {
+        if ((![WeChatPriConfigCenter sharedInstance].shopEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].gameEnter)) {
+            return 0.001;
+        }
+    } else if(section == 5) {
+        if ((![WeChatPriConfigCenter sharedInstance].appletEnter)) {
+            return 0.001;
+        }
+    }
+    return CHSuper2(FindFriendEntryViewController, tableView, tableView, heightForFooterInSection, section);
+}
+
+CHOptimizedMethod2(self, UIView *, FindFriendEntryViewController, tableView, UITableView *, tableView, viewForHeaderInSection, unsigned int, section)
+{
+    if (section == 0) {
+        if (![WeChatPriConfigCenter sharedInstance].friendEnter) {
+            return nil;
+        }
+    } else if(section == 1) {
+        if ((![WeChatPriConfigCenter sharedInstance].scanEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].shakeEnter)) {
+            return nil;
+        }
+    } else if(section == 2) {
+        if ((![WeChatPriConfigCenter sharedInstance].searchEnter)) {
+            return nil;
+        }
+    } else if(section == 3) {
+        if ((![WeChatPriConfigCenter sharedInstance].nearbydEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].driftBottleEnter)) {
+            return nil;
+        }
+    } else if(section == 4) {
+        if ((![WeChatPriConfigCenter sharedInstance].shopEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].gameEnter)) {
+            return nil;
+        }
+    } else if(section == 5) {
+        if ((![WeChatPriConfigCenter sharedInstance].appletEnter)) {
+            return nil;
+        }
+    }
+    return CHSuper2(FindFriendEntryViewController, tableView, tableView, viewForHeaderInSection, section);
+}
+
+CHOptimizedMethod2(self, UIView *, FindFriendEntryViewController, tableView, UITableView *, tableView, viewForFooterInSection, unsigned int, section)
+{
+    if (section == 0) {
+        if (![WeChatPriConfigCenter sharedInstance].friendEnter) {
+            return nil;
+        }
+    } else if(section == 1) {
+        if ((![WeChatPriConfigCenter sharedInstance].scanEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].shakeEnter)) {
+            return nil;
+        }
+    } else if(section == 2) {
+        if ((![WeChatPriConfigCenter sharedInstance].searchEnter)) {
+            return nil;
+        }
+    } else if(section == 3) {
+        if ((![WeChatPriConfigCenter sharedInstance].nearbydEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].driftBottleEnter)) {
+            return nil;
+        }
+    } else if(section == 4) {
+        if ((![WeChatPriConfigCenter sharedInstance].shopEnter) &&
+            (![WeChatPriConfigCenter sharedInstance].gameEnter)) {
+            return nil;
+        }
+    } else if(section == 5) {
+        if ((![WeChatPriConfigCenter sharedInstance].appletEnter)) {
+            return nil;
+        }
+    }
+    return CHSuper2(FindFriendEntryViewController, tableView, tableView, viewForFooterInSection, section);
 }
 
 CHDeclareMethod1(void, FindFriendEntryViewController, cleanCell, UITableViewCell*, cell) {
@@ -1162,6 +1300,10 @@ CHConstructor{
     CHLoadLateClass(FindFriendEntryViewController);
     CHHook2(FindFriendEntryViewController, tableView, heightForRowAtIndexPath);
     CHHook2(FindFriendEntryViewController, tableView, cellForRowAtIndexPath);
+    CHHook2(FindFriendEntryViewController, tableView, heightForHeaderInSection);
+    CHHook2(FindFriendEntryViewController, tableView, heightForFooterInSection);
+    CHHook2(FindFriendEntryViewController, tableView, viewForHeaderInSection);
+    CHHook2(FindFriendEntryViewController, tableView, viewForFooterInSection);
     CHHook1(FindFriendEntryViewController, viewDidAppear);
     
     // 修改微信步数
